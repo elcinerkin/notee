@@ -15,8 +15,13 @@ angular
     'ngResource',
     'ngRoute',
     'ngSanitize',
+<<<<<<< HEAD
     'wu.masonry',
     'ngTouch'
+=======
+    'ngTouch',
+    'ui.bootstrap'
+>>>>>>> origin/master
   ])
   .config(function ($routeProvider) {
     $routeProvider

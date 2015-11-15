@@ -1,0 +1,38 @@
+<div class="row home-container">
+	<div class="col-xs-12" style="height: auto; background: black;">
+		<div class="row" style="margin-bottom: 15px; max-height: 100px; background: gray;">
+			<div class="col-xs-12 col-md-6" style="max-height: 100px; background: blue;">
+				<div class="row text-center">
+					<div class="col-xs-6 col-md-3" style="height: 50px; background: red;"><button ng-click="addNote('text')" class="add-note-button">Text</button></div>
+					<div class="col-xs-6 col-md-3" style="height: 50px; background: green;"><button ng-click="addNote('todo')" class="add-note-button">ToDo</button></div>
+					<div class="col-xs-6 col-md-3" style="height: 50px; background: yellow;"><button ng-click="addNote('image')" class="add-note-button">Image</button></div>
+					<div class="col-xs-6 col-md-3" style="height: 50px; background: orange;"><button ng-click="addNote('links')" class="add-note-button">Links</button></div>
+				</div>
+			</div>
+			<div class="col-xs-12 col-md-6" style="max-height: 100px; background: blue;">
+				<div class="row">
+					<div class="col-xs-12 col-md-8" style="height: 50px; background: red;">Search</div>
+					<div class="col-xs-6 col-md-2" style="height: 50px; background: green;">Date</div>
+					<div class="col-xs-6 col-md-2" style="height: 50px; background: yellow;">Category</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row" style="background: gray;">
+			<div class="cards-container col-xs-12 col-md-12" style="background: black;">
+				<div class="row cards">
+					<div class="card-container col-xs-6 col-md-3" ng-repeat="card in stubbedData.cards track by $index">
+						<div class="card" style="background: lightgray;">
+							<div class="title" ng-bind="card.title"></div>
+							<div class="desc" ng-bind="card.desc"></div>
+							<div class="image-container">
+								<img class="image" ng-src="{{card.imageUrl}}">
+							</div>							
+						</div>						
+					</div>
+				
+				</div>
+			</div>
+		</div>
+	</div>	
+</div>
