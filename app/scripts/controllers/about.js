@@ -14,4 +14,5 @@ angular.module('noteeApp')
       'AngularJS',
       'Karma'
     ];
+
   });

@@ -1,0 +1,37 @@
+
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+<meta name="google-signin-client_id" content="354047653759-nnedbuph3ppaktg3mg53kqkun3g7gbq4.apps.googleusercontent.com.apps.googleusercontent.com">
+<style>
+	img {
+		height: 300px;
+		width: 250px;
+	}
+	#center {
+	    margin: auto;
+	    width: 15%;
+	}	
+</style>
+<div class="jumbotron">
+  <img src="images/notee.jpg" alt="I'm Yeoman"><br>
+  <h3>Welcome to Note-E!</h3>
+  <p class="lead">
+    A new way to manage your notes.
+  </p>
+  <div id="center" class="g-signin2" data-onsuccess="onSignIn" ></div>
+  <script>
+	  function onSignIn(googleUser) {
+	    console.log('clicked');
+	    // Useful data for your client-side scripts:
+	    var profile = googleUser.getBasicProfile();
+	    console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+	    console.log("Name: " + profile.getName());
+	    console.log("Image URL: " + profile.getImageUrl());
+	    console.log("Email: " + profile.getEmail());
+
+	    // The ID token you need to pass to your backend:
+	    var id_token = googleUser.getAuthResponse().id_token;
+	    console.log("ID Token: " + id_token);
+  	  };
+  </script>
+
+</div>
