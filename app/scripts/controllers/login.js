@@ -2,13 +2,13 @@
 
 /**
  * @ngdoc function
- * @name noteeApp.controller:HelpCtrl
+ * @name noteeApp.controller:LoginCtrl
  * @description
- * # HelpCtrl
+ * # LoginCtrl
  * Controller of the noteeApp
  */
 angular.module('noteeApp')
-  .controller('HelpCtrl', function ($scope) {
+  .controller('LoginCtrl', function ($scope) {
     $scope.pageData = {
     	testData: "hello, notees!"
     }

@@ -1,13 +1,71 @@
+<!-- Modal views below-->
+<style>
+    .strike {
+    text-decoration: line-through;
+  }
+  </style>
+<div>
+	<script type="text/ng-template" id="myPlainText.html">
+        <div class="modal-header">
+            <h3 class="modal-title">PlainTextCard</h3>
+        </div>
+        <div class="modal-body">
+        	<input type="text" placeholder="Enter your Title" class="form-control" ng-model="text.title"></br>
+           <input type="text" placeholder="Enter your Tag" class="form-control" ng-model="text.tag"></br>
+           Choose your color: <input type="color" ng-model="card.color"></br></br>
+           <textarea placeholder="Enter your Title" ng-model="text.content" class="form-control"></textarea>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="ok()">Save</button>
+            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+        </div>
+    </script>
+    <script type="text/ng-template" id="mylist.html">
+        <div class="modal-header">
+            <h3 class="modal-title">Check List</h3>
+        </div>
+        <div class="modal-body">
+            <input type="text" placeholder="Enter your Title" class="form-control" ng-model="card.title"></br>
+            <input type="text" placeholder="Enter your Tag" class="form-control" ng-model="card.tag"></br> 
+            Choose your color: <input type="color" ng-model="card.color"></br>
+			<div ng-repeat="list in card.lists" }>
+				<input ng-show="list.content.length > 0" type="checkbox" ng-model="list.check"/>
+				<span ng-class="{strike:list.check}">{{ list.content }}</span>
+            </div>        
+            <input ng-show="list.content.length > 0" type="checkbox" ng-model="list.check" />
+            <span ng-class="{strike:list.check}"> {{ list.content }}</span><br>   
+            <button type="button" ng-show="list.content.length > 0" class="btn btn-default" ng-click="add(list)">save & add more</button></br></br>          
+            <input type="text" placeholder="Enter your NEW list here" class="form-control" ng-model="list.content"></br>    
+        </div>
+        <div class="modal-footer">
+          <div>
+            <span class="btn-group col-md-8">
+              <label class="btn btn-primary" ng-model="card.priority" uib-btn-radio="'on'">Priority On</label>
+              <label class="btn btn-primary" ng-model="card.priority" uib-btn-radio="'off'">Priority Off</label>
+            </span>
+            <span class="col-md-4">
+              <button class="btn btn-primary" type="button" ng-click="ok()">Save</button>
+              <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+            </span>
+          </div>
+        </div>
+    </script>
+</div>
+<div style="display:none;">Here are the data will be saved to backend
+	<div>{{ texts }}</div>
+	<div>{{ cards }}</div>
+</div>
+
 <div class="row home-container">
 	<div class="col-xs-12" style="height: auto; background: none; border: 1px solid #ccc;">
 		<div class="row" style="margin-bottom: 15px; max-height: 100px; background: none;">
 			<div class="col-xs-12 col-md-6" style="max-height: 100px; background: #ccc;">
 				<div class="row text-center">
 					<div class="col-xs-6 col-md-3 add-note">
-						<button ng-click="addNote('text')" class="add-note-button">Text</button>
+						<button ng-click="open()" class="add-note-button">Text</button>
 					</div>
 					<div class="col-xs-6 col-md-3 add-note">
-						<button ng-click="addNote('todo')" class="add-note-button">ToDo</button>
+						<button ng-click="open2()" class="add-note-button">ToDo</button>
 					</div>
 					<div class="col-xs-6 col-md-3 add-note">
 						<button ng-click="addNote('image')" class="add-note-button">Image</button>
