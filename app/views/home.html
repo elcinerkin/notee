@@ -1,36 +1,54 @@
 <div class="row home-container">
-	<div class="col-xs-12" style="height: auto; background: black;">
-		<div class="row" style="margin-bottom: 15px; max-height: 100px; background: gray;">
-			<div class="col-xs-12 col-md-6" style="max-height: 100px; background: blue;">
+	<div class="col-xs-12" style="height: auto; background: none; border: 1px solid #ccc;">
+		<div class="row" style="margin-bottom: 15px; max-height: 100px; background: none;">
+			<div class="col-xs-12 col-md-6" style="max-height: 100px; background: #ccc;">
 				<div class="row text-center">
-					<div class="col-xs-6 col-md-3" style="height: 50px; background: red;"><button ng-click="addNote('text')" class="add-note-button">Text</button></div>
-					<div class="col-xs-6 col-md-3" style="height: 50px; background: green;"><button ng-click="addNote('todo')" class="add-note-button">ToDo</button></div>
-					<div class="col-xs-6 col-md-3" style="height: 50px; background: yellow;"><button ng-click="addNote('image')" class="add-note-button">Image</button></div>
-					<div class="col-xs-6 col-md-3" style="height: 50px; background: orange;"><button ng-click="addNote('links')" class="add-note-button">Links</button></div>
+					<div class="col-xs-6 col-md-3 add-note">
+						<button ng-click="addNote('text')" class="add-note-button">Text</button>
+					</div>
+					<div class="col-xs-6 col-md-3 add-note">
+						<button ng-click="addNote('todo')" class="add-note-button">ToDo</button>
+					</div>
+					<div class="col-xs-6 col-md-3 add-note">
+						<button ng-click="addNote('image')" class="add-note-button">Image</button>
+					</div>
+					<div class="col-xs-6 col-md-3 add-note">
+						<button ng-click="addNote('links')" class="add-note-button">Links</button>
+					</div>
 				</div>
 			</div>
-			<div class="col-xs-12 col-md-6" style="max-height: 100px; background: blue;">
+			<div class="col-xs-12 col-md-6" style="max-height: 100px; background: #ccc;">
 				<div class="row">
-					<div class="col-xs-12 col-md-8" style="height: 50px; background: red;">Search</div>
-					<div class="col-xs-6 col-md-2" style="height: 50px; background: green;">Date</div>
-					<div class="col-xs-6 col-md-2" style="height: 50px; background: yellow;">Category</div>
+					<div class="col-xs-12 col-md-6 search-note">
+						<input class="search-note-input" type="text" placeholder="search here..." />
+					</div>
+					<div class="col-xs-6 col-md-3 search-note" style="font-size: .8em;">
+						<input class="search-note-input" type="date" />
+					</div>
+					<div class="col-xs-6 col-md-3 search-note">
+						<select class="search-note-input">
+							<option value="text">Plain Text</option>
+							<option value="todo">Todo List</option>
+							<option value="image">Image</option>
+							<option value="links">Quick Links</option>
+						</select>
+					</div>
 				</div>
 			</div>
 		</div>
 
-		<div class="row" style="background: gray;">
-			<div class="cards-container col-xs-12 col-md-12" style="background: black;">
-				<div class="row cards">
-					<div class="card-container col-xs-6 col-md-3" ng-repeat="card in stubbedData.cards track by $index">
-						<div class="card" style="background: lightgray;">
+		<div class="row" style="background: none;">
+			<div class="cards-container col-xs-12 col-md-12" style="background: none;">
+				<div masonry class="row cards">
+					<div class="masonry-brick card-container col-xs-6 col-md-3" ng-repeat="card in stubbedData.cards track by $index">
+						<div class="card" style="background: #eee;">
 							<div class="title" ng-bind="card.title"></div>
 							<div class="desc" ng-bind="card.desc"></div>
 							<div class="image-container">
 								<img class="image" ng-src="{{card.imageUrl}}">
 							</div>							
 						</div>						
-					</div>
-				
+					</div>				
 				</div>
 			</div>
 		</div>
