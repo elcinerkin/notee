@@ -6,13 +6,21 @@
   </style>
 <div>
 	<script type="text/ng-template" id="myPlainText.html">
-        <div class="modal-header">
+        <div class="modal-header" style="background-color:{{text.color}}">
             <h3 class="modal-title">PlainTextCard</h3>
         </div>
         <div class="modal-body">
         	<input type="text" placeholder="Enter your Title" class="form-control" ng-model="text.title"></br>
            <input type="text" placeholder="Enter your Tag" class="form-control" ng-model="text.tag"></br>
-           Choose your color: <input type="color" ng-model="card.color"></br></br>
+           Choose your color: <select ng-model="text.color" class="">
+              <option value="#FFFFFF" selected>White</option>
+              <option value="#FF5050"></span><span style="color:FF5050">Red</span></option>
+              <option value="#66FF66">Green</option>
+              <option value="#8D8D8D">Grey</option>
+              <option value="#99CCFF">Blue</option>
+              <option value="#ffff4d">Yellow</option>
+              <option value="#FF66FF">Purple</option>
+            </select></br></br>
            <textarea placeholder="Enter your Title" ng-model="text.content" class="form-control"></textarea>
         </div>
         <div class="modal-footer">
@@ -21,27 +29,37 @@
         </div>
     </script>
     <script type="text/ng-template" id="mylist.html">
-        <div class="modal-header">
+        <div class="modal-header" style="background-color:{{todo.color}}">
             <h3 class="modal-title">Check List</h3>
         </div>
         <div class="modal-body">
-            <input type="text" placeholder="Enter your Title" class="form-control" ng-model="card.title"></br>
-            <input type="text" placeholder="Enter your Tag" class="form-control" ng-model="card.tag"></br> 
-            Choose your color: <input type="color" ng-model="card.color"></br>
-			<div ng-repeat="list in card.lists" }>
+            <input type="text" placeholder="Enter your Title" class="form-control" ng-model="todo.title"></br>
+            <input type="text" placeholder="Enter your Tag" class="form-control" ng-model="todo.tag"></br> 
+            Choose your color: 
+            <select ng-model="todo.color">
+				<option value="#FFFFFF" selected>White</option>
+				<option value="#FF5050"></span><span style="color:FF5050">Red</span></option>
+				<option value="#66FF66">Green</option>
+				<option value="#8D8D8D">Grey</option>
+				<option value="#99CCFF">Blue</option>
+				<option value="#ffff4d">Yellow</option>
+				<option value="#FF66FF">Purple</option>
+				</select><br>
+			<div ng-repeat="list in todo.lists" }>
 				<input ng-show="list.content.length > 0" type="checkbox" ng-model="list.check"/>
 				<span ng-class="{strike:list.check}">{{ list.content }}</span>
-            </div>        
+				<button type="button" aria-label="Left Align" ng-click="remove($index)">remove</button>
+	        </div>       
             <input ng-show="list.content.length > 0" type="checkbox" ng-model="list.check" />
-            <span ng-class="{strike:list.check}"> {{ list.content }}</span><br>   
-            <button type="button" ng-show="list.content.length > 0" class="btn btn-default" ng-click="add(list)">save & add more</button></br></br>          
-            <input type="text" placeholder="Enter your NEW list here" class="form-control" ng-model="list.content"></br>    
+	        <span ng-class="{strike:list.check}"> {{ list.content }}</span><br>   
+	        <button type="button" ng-show="list.content.length > 0" class="btn btn-default" ng-click="add(list)">save & add more</button></br></br>          
+	        <input type="text" placeholder="Enter your NEW list here" class="form-control" ng-model="list.content"><br>
         </div>
         <div class="modal-footer">
           <div>
             <span class="btn-group col-md-8">
-              <label class="btn btn-primary" ng-model="card.priority" uib-btn-radio="'on'">Priority On</label>
-              <label class="btn btn-primary" ng-model="card.priority" uib-btn-radio="'off'">Priority Off</label>
+              <label class="btn btn-primary" ng-model="todo.priority" uib-btn-radio="'on'">Priority On</label>
+              <label class="btn btn-primary" ng-model="todo.priority" uib-btn-radio="'off'">Priority Off</label>
             </span>
             <span class="col-md-4">
               <button class="btn btn-primary" type="button" ng-click="ok()">Save</button>
@@ -51,9 +69,9 @@
         </div>
     </script>
 </div>
-<div style="display:none;">Here are the data will be saved to backend
+<div>Here are the data will be saved to backend
 	<div>{{ texts }}</div>
-	<div>{{ cards }}</div>
+	<div>{{ todos }}</div>
 </div>
 
 <div class="row home-container">
@@ -62,10 +80,10 @@
 			<div class="col-xs-12 col-md-6" style="max-height: 100px; background: #ccc;">
 				<div class="row text-center">
 					<div class="col-xs-6 col-md-3 add-note">
-						<button ng-click="open()" class="add-note-button">Text</button>
+						<button ng-click="addText()" class="add-note-button">Text</button>
 					</div>
 					<div class="col-xs-6 col-md-3 add-note">
-						<button ng-click="open2()" class="add-note-button">ToDo</button>
+						<button ng-click="addList()" class="add-note-button">ToDo</button>
 					</div>
 					<div class="col-xs-6 col-md-3 add-note">
 						<button ng-click="addNote('image')" class="add-note-button">Image</button>

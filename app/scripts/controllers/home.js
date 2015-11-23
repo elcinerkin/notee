@@ -10,12 +10,12 @@
 angular.module('noteeApp')
     .controller('HomeCtrl', function ($scope, $uibModal, $log) {
   $scope.texts = [];
-  $scope.cards = [];
+  $scope.todos = [];
 
-  $scope.open = function () {
+  $scope.addText = function () {
     var modalInstance = $uibModal.open({
       templateUrl: 'myPlainText.html',
-      controller: 'ModalInstanceCtrl1'
+      controller: 'textInstanceCtrl'
     });
 
     modalInstance.result.then(function (text) {
@@ -25,14 +25,14 @@ angular.module('noteeApp')
     });
   };
 
-  $scope.open2 = function () {
+  $scope.addList = function () {
     var modalInstance = $uibModal.open({
       templateUrl: 'mylist.html',
-      controller: 'ModalInstanceCtrl2'
+      controller: 'listInstanceCtrl'
     });
 
-    modalInstance.result.then(function (card) {
-      $scope.cards.push(card);
+    modalInstance.result.then(function (todo) {
+      $scope.todos.push(todo);
     }, function () {
       $log.info('Modal dismissed at: ' + new Date());
     });
@@ -60,8 +60,12 @@ angular.module('noteeApp')
 });
 
 
-angular.module('noteeApp').controller('ModalInstanceCtrl1', function ($scope, $uibModalInstance) {
+angular.module('noteeApp').controller('textInstanceCtrl', function ($scope, $uibModalInstance) {
   $scope.ok = function () {
+    if(typeof($scope.text) == "undefined") {
+      $uibModalInstance.dismiss('cancel');
+      return;
+    }
     $uibModalInstance.close($scope.text);
   };
 
@@ -70,12 +74,16 @@ angular.module('noteeApp').controller('ModalInstanceCtrl1', function ($scope, $u
   };
 });
 
-angular.module('noteeApp').controller('ModalInstanceCtrl2', function ($scope, $uibModalInstance) {
-  $scope.card = {};
-  $scope.card.lists = [];
+angular.module('noteeApp').controller('listInstanceCtrl', function ($scope, $uibModalInstance) {
+  $scope.todo = {};
+  $scope.todo.lists = [];
 
   $scope.ok = function () {
-    $uibModalInstance.close($scope.card);
+    if($scope.todo.lists.length == 0) {
+      $uibModalInstance.dismiss('cancel');
+      return;
+    }
+    $uibModalInstance.close($scope.todo);
   };
 
   $scope.cancel = function () {
@@ -84,6 +92,10 @@ angular.module('noteeApp').controller('ModalInstanceCtrl2', function ($scope, $u
 
   $scope.add = function (list) {
     $scope.list = null;
-    $scope.card.lists.push(list);
+    $scope.todo.lists.push(list);
   };
+
+  $scope.remove = function(index) { 
+    $scope.todo.lists.splice(index, 1)     
+  }
  });
