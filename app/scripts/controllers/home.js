@@ -11,6 +11,8 @@ angular.module('noteeApp')
     .controller('HomeCtrl', function ($scope, $uibModal, $log) {
   $scope.texts = [];
   $scope.todos = [];
+  $scope.photos = [];
+  $scope.links = [];
 
   $scope.addText = function () {
     var modalInstance = $uibModal.open({
@@ -38,6 +40,31 @@ angular.module('noteeApp')
     });
   };
 
+  $scope.addPhoto = function () {
+    var modalInstance = $uibModal.open({
+      templateUrl: 'myPhoto.html',
+      controller: 'photoInstanceCtrl'
+    });
+
+    modalInstance.result.then(function (photo) {
+      $scope.photos.push(photo);
+    }, function () {
+      $log.info('Modal dismissed at: ' + new Date());
+    });
+  };
+
+  $scope.addLink = function () {
+    var modalInstance = $uibModal.open({
+      templateUrl: 'mylink.html',
+      controller: 'linkInstanceCtrl'
+    });
+
+    modalInstance.result.then(function (link) {
+      $scope.links.push(link);
+    }, function () {
+      $log.info('Modal dismissed at: ' + new Date());
+    });
+  };
    $scope.stubbedData = {
      cards: [],
      config: {}
@@ -97,5 +124,45 @@ angular.module('noteeApp').controller('listInstanceCtrl', function ($scope, $uib
 
   $scope.remove = function(index) { 
     $scope.todo.lists.splice(index, 1)     
+  }
+ });
+
+angular.module('noteeApp').controller('photoInstanceCtrl', function ($scope, $uibModalInstance) {
+  $scope.ok = function () {
+    if(typeof($scope.photo) == "undefined") {
+      $uibModalInstance.dismiss('cancel');
+      return;
+    }
+    $uibModalInstance.close($scope.photo);
+  };
+
+  $scope.cancel = function () {
+    $uibModalInstance.dismiss('cancel');
+  };
+});
+
+angular.module('noteeApp').controller('linkInstanceCtrl', function ($scope, $uibModalInstance) {
+  $scope.link = {};
+  $scope.link.urls = [];
+
+  $scope.ok = function () {
+    if($scope.link.urls.length == 0) {
+      $uibModalInstance.dismiss('cancel');
+      return;
+    }
+    $uibModalInstance.close($scope.link);
+  };
+
+  $scope.cancel = function () {
+    $uibModalInstance.dismiss('cancel');
+  };
+
+  $scope.add = function (url) {
+    $scope.url = null;
+    $scope.link.urls.push(url);
+  };
+
+  $scope.remove = function(index) { 
+    $scope.link.urls.splice(index, 1)     
   }
  });
