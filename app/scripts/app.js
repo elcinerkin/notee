@@ -19,7 +19,8 @@ angular
     'ngTouch',
     'ui.bootstrap',
     'ui.router',
-    'authentication.services'
+    'authentication.services',
+    'camera'
   ])
 
 

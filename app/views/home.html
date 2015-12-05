@@ -84,7 +84,25 @@
               <option value="#ffff4d">Yellow</option>
               <option value="#FF66FF">Purple</option>
             </select><br /><br />
-            <input type="file">
+            <input type="file" />
+
+            <button class="btn" type="button" ng-click="camera=true">Take a photo</button>
+            <div ng-if="camera">
+              <ng-camera
+                  capture-message="Cheeeese!"
+                  countdown="3"
+                  output-height="160"
+                  output-width="213"
+                  viewer-height="320"
+                  viewer-width="426"
+                  image-format="jpeg"
+                  jpeg-quality="100"
+                  action-message="Countdown 3s"
+                  snapshot="vm.picture"
+                  flash-fallback-url="../../bower_components/webcamjs/webcam.swf"
+                  shutter-url="../media/shutter.mp3"></ng-camera>
+              <img ng-if="vm.picture" ng-src="{{vm.picture}}" alt="webcam picture">
+            </div>
         </div>
         <div class="modal-footer">
             <button class="btn btn-primary" type="button" ng-click="ok()">Save</button>
