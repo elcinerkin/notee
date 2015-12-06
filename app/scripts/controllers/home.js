@@ -8,67 +8,69 @@
  * Controller of the noteeApp
  */
 angular.module('noteeApp')
-    .controller('HomeCtrl', function ($scope, $uibModal, $log) {
-  $scope.texts = [];
-  $scope.todos = [];
-  $scope.photos = [];
-  $scope.links = [];
+  .controller('HomeCtrl', function ($scope, $uibModal, $log) {
+    $scope.texts = [];
+    $scope.todos = [];
+    $scope.photos = [];
+    $scope.links = [];
 
-  $scope.addText = function () {
-    var modalInstance = $uibModal.open({
-      templateUrl: 'myPlainText.html',
-      controller: 'textInstanceCtrl'
-    });
+    $scope.addText = function () {
+      var modalInstance = $uibModal.open({
+        templateUrl: 'myPlainText.html',
+        controller: 'textInstanceCtrl'
+      });
 
-    modalInstance.result.then(function (text) {
-      $scope.texts.push(text);
-    }, function () {
-      $log.info('Modal dismissed at: ' + new Date());
-    });
-  };
-
-  $scope.addList = function () {
-    var modalInstance = $uibModal.open({
-      templateUrl: 'mylist.html',
-      controller: 'listInstanceCtrl'
-    });
-
-    modalInstance.result.then(function (todo) {
-      $scope.todos.push(todo);
-    }, function () {
-      $log.info('Modal dismissed at: ' + new Date());
-    });
-  };
-
-  $scope.addPhoto = function () {
-    var modalInstance = $uibModal.open({
-      templateUrl: 'myPhoto.html',
-      controller: 'photoInstanceCtrl'
-    });
-
-    modalInstance.result.then(function (photo) {
-      $scope.photos.push(photo);
-    }, function () {
-      $log.info('Modal dismissed at: ' + new Date());
-    });
-  };
-
-  $scope.addLink = function () {
-    var modalInstance = $uibModal.open({
-      templateUrl: 'mylink.html',
-      controller: 'linkInstanceCtrl'
-    });
-
-    modalInstance.result.then(function (link) {
-      $scope.links.push(link);
-    }, function () {
-      $log.info('Modal dismissed at: ' + new Date());
-    });
-  };
-   $scope.stubbedData = {
-     cards: [],
-     config: {}
+      modalInstance.result.then(function (text) {
+        $scope.texts.push(text);
+      }, function () {
+        $log.info('Modal dismissed at: ' + new Date());
+      });
     };
+
+    $scope.addList = function () {
+      var modalInstance = $uibModal.open({
+        templateUrl: 'mylist.html',
+        controller: 'listInstanceCtrl'
+      });
+
+      modalInstance.result.then(function (todo) {
+        $scope.todos.push(todo);
+      }, function () {
+        $log.info('Modal dismissed at: ' + new Date());
+      });
+    };
+
+    $scope.addPhoto = function () {
+      var modalInstance = $uibModal.open({
+        templateUrl: 'myPhoto.html',
+        controller: 'photoInstanceCtrl'
+      });
+
+      modalInstance.result.then(function (photo) {
+        $scope.photos.push(photo);
+      }, function () {
+        $log.info('Modal dismissed at: ' + new Date());
+      });
+    };
+
+    $scope.addLink = function () {
+      var modalInstance = $uibModal.open({
+        templateUrl: 'mylink.html',
+        controller: 'linkInstanceCtrl'
+      });
+
+      modalInstance.result.then(function (link) {
+        $scope.links.push(link);
+      }, function () {
+        $log.info('Modal dismissed at: ' + new Date());
+      });
+    };
+    
+    $scope.stubbedData = {
+       cards: [],
+       config: {}
+    };
+    
     var card = {
      title: "card title ",
      desc: "card description ",

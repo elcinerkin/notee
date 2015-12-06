@@ -11,5 +11,5 @@ angular.module('noteeApp')
   .controller('LoginCtrl', function ($scope) {
     $scope.pageData = {
     	testData: "hello, notees!"
-    }
+    };
   });
