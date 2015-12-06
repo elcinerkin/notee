@@ -18,38 +18,25 @@
       <div class="navbar navbar-default" role="navigation">
         <div class="container">
           <div class="navbar-header">
-
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#js-navbar-collapse" ng-click="navCollapsed = !navCollapsed">
               <span class="sr-only">Toggle navigation</span>
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-
             <a class="navbar-brand" href="#/">notee</a>
           </div>
 
-          <!-- <div class="collapse navbar-collapse" id="js-navbar-collapse"> -->
-
-            <!-- <ul class="nav navbar-nav">
-              <li class="active"><a href="#/home">Home</a></li>
-              <li><a ng-href="#/about">About</a></li>
-              <li><a ng-href="#/">Contact</a></li>
-            </ul> -->
-        <div class="collapse navbar-collapse navbar-menu" collapse="navCollapsed">
-            <ul class="nav navbar-nav">
-            <!-- Airline code label -->
-              <li class="active"><a href="#/home">Home</a></li>
-              <li><a ng-href="#/about">About</a></li>
-              <li><a ng-href="#/">Contact</a></li>
-            </ul>
-            <a style="float:right;padding:20px" href="#" onclick="signOut();">Sign out</a> 
-        </div> <!-- /.navbar-collapse -->
-          <!-- </div> -->
+          <div class="collapse navbar-collapse navbar-menu" collapse="navCollapsed" ng-controller="headerCtrl">
+              <ul class="nav navbar-nav">
+                <li ng-class="{ active: isActive('/home')}"><a href="#/home">Home</a></li>
+                <li ng-class="{ active: isActive('/about')}"><a ng-href="#/about">About</a></li>
+                <li ng-class="{ active: isActive('/contact')}"><a ng-href="#/contact">Contact</a></li>
+                <li ng-class="{ active: isActive('/help')}"><a ng-href="#/help">Help</a></li>
+              </ul>
+              <a style="float:right;padding:20px" href="#" onclick="signOut();">Sign out</a> 
+          </div> 
         </div>
-
-
-
       </div>
     </div>
 
@@ -112,6 +99,8 @@
     <script src="scripts/controllers/about.js"></script>
     <script src="scripts/controllers/login.js"></script>
     <script src="scripts/controllers/home.js"></script>
+    <script src="scripts/controllers/contact.js"></script>
+    <script src="scripts/controllers/help.js"></script>
 
 
 </body>
