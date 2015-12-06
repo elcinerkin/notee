@@ -51,6 +51,11 @@ angular
         url:'/home',
         templateUrl: 'views/home.html',
         controller: 'HomeCtrl'
+      })
+      .state('contact', {
+        url:'/contact',
+        templateUrl: 'views/contact.html',
+        controller: 'ContactCtrl'
       });
 
     $urlRouterProvider.otherwise('/login');
@@ -66,4 +71,10 @@ angular
       $location.path('/login');
     }
   })
+})
+
+.controller('headerCtrl', function($scope, $location){
+  $scope.isActive = function (viewLocation) { 
+      return viewLocation === $location.path();
+  }
 });
