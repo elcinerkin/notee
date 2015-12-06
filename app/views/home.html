@@ -20,8 +20,8 @@
         </div>
         <div class="modal-footer">
         	<span class="btn-group col-md-8">
-				<label class="btn btn-primary" ng-model="text.priority" uib-btn-radio="'on'">Priority On</label>
-				<label class="btn btn-primary" ng-model="text.priority" uib-btn-radio="'off'">Priority Off</label>
+				<label class="btn btn-danger" ng-model="text.priority" uib-btn-radio="'High'">Priority High</label>
+				<label class="btn btn-default" ng-model="text.priority" uib-btn-radio="'Low'">Priority Low</label>
             </span>
             <button class="btn btn-primary" type="button" ng-click="ok()">Save</button>
             <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
@@ -82,7 +82,7 @@
             </select><br /><br />
             <input type="file" />
 
-            <button class="btn" type="button" ng-click="camera=true">Take a photo</button>
+            <button class="btn btn-default btn-xs" type="button" ng-click="camera=true">Take a photo</button>
             <div ng-if="camera">
               <ng-camera
                   capture-message="Cheeeese!"
@@ -102,8 +102,8 @@
         </div>
         <div class="modal-footer">
         	<span class="btn-group col-md-8">
-				<label class="btn btn-primary" ng-model="photo.priority" uib-btn-radio="'on'">Priority On</label>
-				<label class="btn btn-primary" ng-model="photo.priority" uib-btn-radio="'off'">Priority Off</label>
+				<label class="btn btn-danger" ng-model="photo.priority" uib-btn-radio="'High'">Priority High</label>
+				<label class="btn btn-default" ng-model="photo.priority" uib-btn-radio="'Low'">Priority Low</label>
             </span>
             <button class="btn btn-primary" type="button" ng-click="ok()">Save</button>
             <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
