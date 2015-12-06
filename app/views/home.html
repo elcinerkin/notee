@@ -6,7 +6,7 @@
         </div>
         <div class="modal-body">
         	<input type="text" placeholder="Enter your Title" class="form-control" ng-model="text.title"></br>
-           <input type="text" placeholder="Enter your Tag" class="form-control" ng-model="text.tag"></br>
+           <input type="text" placeholder="Enter your Tag" class="form-control" ng-model="text.tags"></br>
            Choose your color: <select ng-model="text.color" class="">
               <option value="#FFFFFF" selected>White</option>
               <option value="#FF5050"></span><span style="color:FF5050">Red</span></option>
@@ -19,12 +19,8 @@
            <textarea placeholder="Enter your Title" ng-model="text.content" class="form-control"></textarea>
         </div>
         <div class="modal-footer">
-        	<span class="btn-group col-md-8">
-				<label class="btn btn-danger" ng-model="text.priority" uib-btn-radio="'High'">Priority High</label>
-				<label class="btn btn-default" ng-model="text.priority" uib-btn-radio="'Low'">Priority Low</label>
-            </span>
-            <button class="btn btn-primary" type="button" ng-click="ok()">Save</button>
-            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+          <button class="btn btn-primary" type="button" ng-click="ok()">Save</button>
+          <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
         </div>
     </script>
     <script type="text/ng-template" id="mylist.html">
@@ -80,7 +76,7 @@
               <option value="#ffff4d">Yellow</option>
               <option value="#FF66FF">Purple</option>
             </select><br /><br />
-            <input type="file" />
+            <input type="file" ng-model="photo.img" base-sixty-four-input/>
 
             <button class="btn btn-default btn-xs" type="button" ng-click="camera=true">Take a photo</button>
             <div ng-if="camera">
@@ -128,7 +124,7 @@
 				</select><br>
 			<div ng-repeat="url in link.urls" }>
 				<a ng-src="{{ url.content }}"><span ng-hide="url.description.length > 0"> {{ url.content}} </span>{{ url.description }}</a>
-				<button type="button" aria-label="Left Align" ng-click="remove($index)">remove</button>
+				<button class="btn btn-warning btn-xs" ng-click="remove($index)">remove</button>
 	        </div>       
             <span ng-show="url.content.length > 0">
             	<a ng-src="{{ url.content }}"><span ng-hide="url.description.length > 0"> {{ url.content}} </span> {{ url.description }}
@@ -147,12 +143,12 @@
         </div>
     </script>
 </div>
-<!-- <div>Here are the data will be saved to backend
+<div>Here are the data will be saved to backend
 	<div>{{ texts }}</div>
 	<div>{{ todos }}</div>
 	<div>{{ photos }}</div>
 	<div>{{ links }}</div>
-</div> -->
+</div>
 
 <div class="row home-container">
 	<div class="col-xs-12" style="height: auto; background: none; border: 1px solid #ccc;">

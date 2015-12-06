@@ -89,8 +89,19 @@ angular.module('noteeApp')
 });
 
 
-angular.module('noteeApp').controller('textInstanceCtrl', function ($scope, $uibModalInstance) {
+angular.module('noteeApp').controller('textInstanceCtrl', function ($scope, $uibModalInstance, $http) {
   $scope.ok = function () {
+
+  $http({
+    method: 'POST',
+    url: 'http://localhost:3030/api/notes',
+    data: { note: $scope.text }
+    }).then(function successCallback(response) {
+      console.log(response);
+    }, function errorCallback(response) {
+      console.log(response);
+  });
+
     if(typeof($scope.text) == "undefined") {
       $uibModalInstance.dismiss('cancel');
       return;
