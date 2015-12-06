@@ -1,9 +1,4 @@
 <!-- Modal views below-->
-<style>
-    .strike {
-    text-decoration: line-through;
-  }
-  </style>
 <div>
 	<script type="text/ng-template" id="myPlainText.html">
         <div class="modal-header" style="background-color:{{text.color}}">
@@ -24,6 +19,10 @@
            <textarea placeholder="Enter your Title" ng-model="text.content" class="form-control"></textarea>
         </div>
         <div class="modal-footer">
+        	<span class="btn-group col-md-8">
+				<label class="btn btn-primary" ng-model="text.priority" uib-btn-radio="'on'">Priority On</label>
+				<label class="btn btn-primary" ng-model="text.priority" uib-btn-radio="'off'">Priority Off</label>
+            </span>
             <button class="btn btn-primary" type="button" ng-click="ok()">Save</button>
             <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
         </div>
@@ -48,23 +47,20 @@
 			<div ng-repeat="list in todo.lists" }>
 				<input ng-show="list.content.length > 0" type="checkbox" ng-model="list.check"/>
 				<span ng-class="{strike:list.check}">{{ list.content }}</span>
-				<button type="button" aria-label="Left Align" ng-click="remove($index)">remove</button>
-	        </div>       
-            <input ng-show="list.content.length > 0" type="checkbox" ng-model="list.check" />
-	        <span ng-class="{strike:list.check}"> {{ list.content }}</span><br>   
-	        <button type="button" ng-show="list.content.length > 0" class="btn btn-default" ng-click="add(list)">Confrim</button></br>         
-	        <input type="text" placeholder="Enter your NEW list here" class="form-control" ng-model="list.content"><br>
+        <div class="btn-group">
+          <label class="btn btn-danger btn-xs" ng-model="list.priority" uib-btn-radio="'High'">Priority High</label>
+          <label class="btn btn-default btn-xs" ng-model="list.priority" uib-btn-radio="'Low'">Priority Low</label>
         </div>
+        <button class="btn btn-warning btn-xs" ng-click="remove($index)">remove</button>
+	    </div>       
+        <input ng-show="list.content.length > 0" type="checkbox" ng-model="list.check" />
+	      <span ng-class="{strike:list.check}"> {{ list.content }}</span><br>   
+	      <button type="button" ng-show="list.content.length > 0" class="btn btn-default" ng-click="add(list)">Confrim</button></br>         
+	      <input type="text" placeholder="Enter your NEW list here" class="form-control" ng-model="list.content"><br>
         <div class="modal-footer">
           <div>
-            <span class="btn-group col-md-8">
-              <label class="btn btn-primary" ng-model="todo.priority" uib-btn-radio="'on'">Priority On</label>
-              <label class="btn btn-primary" ng-model="todo.priority" uib-btn-radio="'off'">Priority Off</label>
-            </span>
-            <span class="col-md-4">
               <button class="btn btn-primary" type="button" ng-click="ok()">Save</button>
               <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
-            </span>
           </div>
         </div>
     </script>
@@ -84,9 +80,31 @@
               <option value="#ffff4d">Yellow</option>
               <option value="#FF66FF">Purple</option>
             </select><br /><br />
-            <input type="file">
+            <input type="file" />
+
+            <button class="btn" type="button" ng-click="camera=true">Take a photo</button>
+            <div ng-if="camera">
+              <ng-camera
+                  capture-message="Cheeeese!"
+                  countdown="3"
+                  output-height="160"
+                  output-width="213"
+                  viewer-height="320"
+                  viewer-width="426"
+                  image-format="jpeg"
+                  jpeg-quality="100"
+                  action-message="Countdown 3s"
+                  snapshot="vm.picture"
+                  flash-fallback-url="../../bower_components/webcamjs/webcam.swf"
+                  shutter-url="../media/shutter.mp3"></ng-camera>
+              <img ng-if="vm.picture" ng-src="{{vm.picture}}" alt="webcam picture">
+            </div>
         </div>
         <div class="modal-footer">
+        	<span class="btn-group col-md-8">
+				<label class="btn btn-primary" ng-model="photo.priority" uib-btn-radio="'on'">Priority On</label>
+				<label class="btn btn-primary" ng-model="photo.priority" uib-btn-radio="'off'">Priority Off</label>
+            </span>
             <button class="btn btn-primary" type="button" ng-click="ok()">Save</button>
             <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
         </div>
@@ -109,25 +127,19 @@
 				<option value="#FF66FF">Purple</option>
 				</select><br>
 			<div ng-repeat="url in link.urls" }>
-				URL: <a>{{ url.content }}</a><br />
-				Description: {{ url.description }}
+				<a ng-src="{{ url.content }}"><span ng-hide="url.description.length > 0"> {{ url.content}} </span>{{ url.description }}</a>
 				<button type="button" aria-label="Left Align" ng-click="remove($index)">remove</button>
 	        </div>       
             <span ng-show="url.content.length > 0">
-            	URL: <a> {{ url.content }}</a><br />
-            	Description: {{url.description}}
+            	<a ng-src="{{ url.content }}"><span ng-hide="url.description.length > 0"> {{ url.content}} </span> {{ url.description }}
+            	</a><br />
             </span><br>   
-	        <button type="button" ng-show="url.content.length > 0" class="btn btn-default" ng-click="add(url)">Confrim</button></br>         
+	        <button type="button" ng-show="url.content.length > 0" class="btn btn-default" ng-click="add(url)">Confrim</button><br> <br>        
 	        <input type="text" placeholder="Add your URL here" class="form-control" ng-model="url.content"><br />
 	        <input type="text" placeholder="Add description" class="form-control" ng-model="url.description"><br />
         </div>
         <div class="modal-footer">
           <div>
-            <span class="btn-group col-md-8">
-              <label class="btn btn-primary" ng-model="todo.priority" uib-btn-radio="'on'">Priority On</label>
-              <label class="btn btn-primary" ng-model="todo.priority" uib-btn-radio="'off'">Priority Off</label>
-            </span>
-            <span class="col-md-4">
               <button class="btn btn-primary" type="button" ng-click="ok()">Save</button>
               <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
             </span>

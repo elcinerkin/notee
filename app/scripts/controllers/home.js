@@ -139,6 +139,11 @@ angular.module('noteeApp').controller('photoInstanceCtrl', function ($scope, $ui
   $scope.cancel = function () {
     $uibModalInstance.dismiss('cancel');
   };
+
+
+  /* jshint validthis: true */
+  var vm = this;
+  vm.picture = false; // Initial state
 });
 
 angular.module('noteeApp').controller('linkInstanceCtrl', function ($scope, $uibModalInstance) {
