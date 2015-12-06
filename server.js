@@ -14,7 +14,24 @@ var NoteSchema = mongoose.Schema({
 	title: String,
 	content: String
 });
-var Notes = restful.model('notes', NoteSchema);
+
+var schema = mongoose.Schema({
+     email: String,
+     createdDate: Date,
+     category: String,
+     note: {
+          title: String,
+          color: String,
+          tags: Array,
+          priority: Boolean,
+          content: String,
+          image: String,
+          todo: Array,
+          links: Array          
+     }
+});
+
+var Notes = restful.model('notes', schema);
 Notes.methods(['post', 'get', 'put', 'delete']);
 Notes.register(app, '/api/notes');
 
