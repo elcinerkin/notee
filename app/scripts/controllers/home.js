@@ -39,8 +39,6 @@ angular.module('noteeApp')
         $log.info('Modal dismissed at: ' + new Date());
       });
     };
-<<<<<<< HEAD
-
     $scope.addPhoto = function () {
       var modalInstance = $uibModal.open({
         templateUrl: 'myPhoto.html',
@@ -53,29 +51,11 @@ angular.module('noteeApp')
         $log.info('Modal dismissed at: ' + new Date());
       });
     };
-
-=======
-
-    $scope.addPhoto = function () {
-      var modalInstance = $uibModal.open({
-        templateUrl: 'myPhoto.html',
-        controller: 'photoInstanceCtrl'
-      });
-
-      modalInstance.result.then(function (photo) {
-        $scope.photos.push(photo);
-      }, function () {
-        $log.info('Modal dismissed at: ' + new Date());
-      });
-    };
-
->>>>>>> f151c192d14518eb8da5dd18991ad39c1f11a8d1
     $scope.addLink = function () {
       var modalInstance = $uibModal.open({
         templateUrl: 'mylink.html',
         controller: 'linkInstanceCtrl'
       });
-
       modalInstance.result.then(function (link) {
         $scope.links.push(link);
       }, function () {
@@ -86,14 +66,12 @@ angular.module('noteeApp')
     $scope.stubbedData = {
        cards: [],
        config: {}
-    };
-    
+    };    
     var card = {
      title: "card title ",
      desc: "card description ",
      imageUrl: "http://cdn.mobileswall.com/wp-content/uploads/2013/12/900-Black-Iron-Man-l.jpg"
     }
-
     for(var i=0; i<30; i++){
      //var newCard = card;
      var newCard = new Object();
