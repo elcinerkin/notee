@@ -39,6 +39,7 @@ angular.module('noteeApp')
         $log.info('Modal dismissed at: ' + new Date());
       });
     };
+<<<<<<< HEAD
 
     $scope.addPhoto = function () {
       var modalInstance = $uibModal.open({
@@ -53,6 +54,22 @@ angular.module('noteeApp')
       });
     };
 
+=======
+
+    $scope.addPhoto = function () {
+      var modalInstance = $uibModal.open({
+        templateUrl: 'myPhoto.html',
+        controller: 'photoInstanceCtrl'
+      });
+
+      modalInstance.result.then(function (photo) {
+        $scope.photos.push(photo);
+      }, function () {
+        $log.info('Modal dismissed at: ' + new Date());
+      });
+    };
+
+>>>>>>> f151c192d14518eb8da5dd18991ad39c1f11a8d1
     $scope.addLink = function () {
       var modalInstance = $uibModal.open({
         templateUrl: 'mylink.html',
