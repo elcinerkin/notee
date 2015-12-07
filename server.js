@@ -38,11 +38,10 @@ var schema = mongoose.Schema({
           title: String,
           color: String,
           tags: Array,
-          priority: Boolean,
           content: String,
           image: String,
-          todo: Array,
-          links: Array          
+          lists: Array,
+          urls: Array          
      }
 });
 
