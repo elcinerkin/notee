@@ -51,7 +51,7 @@
 	    </div>       
         <input ng-show="list.content.length > 0" type="checkbox" ng-model="list.check" />
 	      <span ng-class="{strike:list.check}"> {{ list.content }}</span><br>   
-	      <button type="button" ng-show="list.content.length > 0" class="btn btn-default" ng-click="add(list)">Confrim</button></br>         
+	      <button type="button" ng-show="list.content.length > 0" class="btn btn-default" ng-click="add(list)">Confirm</button></br>         
 	      <input type="text" placeholder="Enter your NEW list here" class="form-control" ng-model="list.content"><br>
         <div class="modal-footer">
           <div>
@@ -126,7 +126,7 @@
             	<a ng-src="{{ url.content }}"><span ng-hide="url.description.length > 0"> {{ url.content}} </span> {{ url.description }}
             	</a><br />
             </span><br>   
-	        <button type="button" ng-show="url.content.length > 0" class="btn btn-default" ng-click="add(url)">Confrim</button><br> <br>        
+	        <button type="button" ng-show="url.content.length > 0" class="btn btn-default" ng-click="add(url)">Confirm</button><br> <br>        
 	        <input type="text" placeholder="Add your URL here" class="form-control" ng-model="url.content"><br />
 	        <input type="text" placeholder="Add description" class="form-control" ng-model="url.description"><br />
         </div>
