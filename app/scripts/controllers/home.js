@@ -8,7 +8,7 @@
  * Controller of the noteeApp
  */
 angular.module('noteeApp')
-  .controller('HomeCtrl', function ($scope, $uibModal, $log) {
+  .controller('HomeCtrl', function ($scope, $uibModal, $log, $http) {
     $scope.texts = [];
     $scope.todos = [];
     $scope.photos = [];
@@ -63,6 +63,9 @@ angular.module('noteeApp')
       });
     };
     
+    $scope.pageData = {
+      cards: []
+    };
     $scope.stubbedData = {
        cards: [],
        config: {}
@@ -81,6 +84,20 @@ angular.module('noteeApp')
      if(i%3==0) newCard.imageUrl = card.imageUrl;
      $scope.stubbedData.cards[i] = newCard;
     }
+
+    var loadData = function(){
+      var getAllNotesPromise = $http.get("http://localhost:3030/api/notes");
+      
+      getAllNotesPromise.then(function successCallback(response) {
+        //console.log(response);
+        $scope.pageData.cards = [];
+        $scope.pageData.cards.length = 0;
+        $scope.pageData.cards = response.data;
+      }, function errorCallback(response) {
+        console.log(response);
+      });  
+    }
+    loadData();
 });
 
 
@@ -99,7 +116,7 @@ angular.module('noteeApp').controller('textInstanceCtrl', function ($scope, $uib
               createdDate:$scope.createdDate,
               note: $scope.text }
       }).then(function successCallback(response) {
-        console.log(response);
+        console.log(response);        
       }, function errorCallback(response) {
         console.log(response);
     });

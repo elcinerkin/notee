@@ -188,12 +188,12 @@
 		<div class="row" style="background: none;">
 			<div class="cards-container col-xs-12 col-md-12" style="background: none;">
 				<div masonry class="row cards">
-					<div class="masonry-brick card-container col-xs-6 col-md-3" ng-repeat="card in stubbedData.cards track by $index">
+					<div class="masonry-brick card-container col-xs-6 col-md-3" ng-repeat="card in pageData.cards track by $index">
 						<div class="card" style="background: #eee;">
-							<div class="title" ng-bind="card.title"></div>
-							<div class="desc" ng-bind="card.desc"></div>
+							<div class="title" ng-bind="card.note.title"></div>
+							<div class="desc" ng-bind="card.note.content"></div>
 							<div class="image-container">
-								<img class="image" ng-src="{{card.imageUrl}}">
+								<img class="image" ng-src="{{card.note.imageUrl}}">
 							</div>							
 						</div>						
 					</div>				
