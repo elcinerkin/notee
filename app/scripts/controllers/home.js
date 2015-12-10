@@ -167,22 +167,43 @@ angular.module('noteeApp').controller('photoInstanceCtrl', function ($scope, $ui
     if(typeof($scope.photo) == "undefined") {
       alert("Cannot save an empty note!");
       return;
-    console.log($scope.photo.img);
+    }
     $scope.createdDate = new Date();
     $scope.category = "image";
-    $http({
-      method: 'POST',
-      url: 'http://localhost:3030/api/notes',
-      data: { category: $scope.category,
-              createdDate:$scope.createdDate,
-              note: $scope.photo }
-      }).then(function successCallback(response) {
-        console.log(response);
-      }, function errorCallback(response) {
-        console.log(response);
-      });
+    if (typeof($scope.photo.image) == "undefined") {
+      $scope.photo.image = document.getElementById("image").src;
+      $http({
+        method: 'POST',
+        url: 'http://localhost:3030/api/notes',
+        data: { category: $scope.category,
+                createdDate:$scope.createdDate,
+                note: $scope.photo }
+        }).then(function successCallback(response) {
+          console.log(response);
+        }, function errorCallback(response) {
+          console.log(response);
+        });
+      $uibModalInstance.dismiss('cancel');
+    } else {
+      // convert File object to base64 string
+      var reader  = new FileReader();
+      reader.readAsDataURL($scope.photo.image);
+      reader.onloadend = function () {
+        $scope.photo.image = reader.result;
+        $http({
+          method: 'POST',
+          url: 'http://localhost:3030/api/notes',
+          data: { category: $scope.category,
+                  createdDate:$scope.createdDate,
+                  note: $scope.photo }
+          }).then(function successCallback(response) {
+            console.log(response);
+          }, function errorCallback(response) {
+            console.log(response);
+          });
+        $uibModalInstance.dismiss('cancel');
+      }
     }
-  $uibModalInstance.dismiss('cancel');
   };
   $scope.cancel = function () {
     $uibModalInstance.dismiss('cancel');

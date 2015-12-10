@@ -76,7 +76,7 @@
               <option value="#ffff4d">Yellow</option>
               <option value="#FF66FF">Purple</option>
             </select><br /><br />
-            <input type="file" capture="camera" accept="image/*" ng-model="photo.img"/>
+            <input type="file" accept="image/*" file-model="photo.image" />
             <button class="btn btn-default btn-xs" ng-hide="camera" type="button" ng-click="camera=true">Take a photo</button>
             <div ng-if="camera">
               <ng-camera
@@ -92,7 +92,7 @@
                   snapshot="vm.picture"
                   flash-fallback-url="../../bower_components/webcamjs/webcam.swf"
                   shutter-url="../media/shutter.mp3"></ng-camera>
-              <img ng-if="vm.picture" ng-src="{{vm.picture}}" ng-model="photo.img" alt="webcam picture">
+              <img ng-if="vm.picture" ng-src="{{vm.picture}}" alt="webcam picture" id="image">
             </div>
         </div>
         <div class="modal-footer">
@@ -137,13 +137,8 @@
           </div>
         </div>
     </script>
-</div><!-- 
-<div>Here are the data will be saved to backend
-	<div>{{ texts }}</div>
-	<div>{{ todos }}</div>
-	<div>{{ photos }}</div>
-	<div>{{ links }}</div>
-</div> -->
+</div>
+
 
 <div class="row home-container">
 	<div class="col-xs-12" style="height: auto; background: none; border: 1px solid #ccc;">
