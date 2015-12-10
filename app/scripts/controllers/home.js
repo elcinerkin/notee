@@ -108,7 +108,7 @@ angular.module('noteeApp').controller('textInstanceCtrl', function ($scope, $uib
         return;
       }
     $scope.createdDate = new Date();
-    $scope.category = "Plain Text";
+    $scope.category = "text";
     $http({
       method: 'POST',
       url: 'http://localhost:3030/api/notes',
@@ -136,7 +136,7 @@ angular.module('noteeApp').controller('listInstanceCtrl', function ($scope, $uib
       return;
     }
     $scope.createdDate = new Date();
-    $scope.category = "Todo List";
+    $scope.category = "todo";
     $http({
       method: 'POST',
       url: 'http://localhost:3030/api/notes',
@@ -167,8 +167,9 @@ angular.module('noteeApp').controller('photoInstanceCtrl', function ($scope, $ui
     if(typeof($scope.photo) == "undefined") {
       alert("Cannot save an empty note!");
       return;
+    console.log($scope.photo.img);
     $scope.createdDate = new Date();
-    $scope.category = "Image";
+    $scope.category = "image";
     $http({
       method: 'POST',
       url: 'http://localhost:3030/api/notes',
@@ -201,7 +202,7 @@ angular.module('noteeApp').controller('linkInstanceCtrl', function ($scope, $uib
       return;
     }
     $scope.createdDate = new Date();
-    $scope.category = "Quick Links";
+    $scope.category = "links";
     $http({
       method: 'POST',
       url: 'http://localhost:3030/api/notes',
