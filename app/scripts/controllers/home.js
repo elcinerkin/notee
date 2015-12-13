@@ -107,6 +107,9 @@ angular.module('noteeApp').controller('textInstanceCtrl', function ($scope, $uib
         alert("Cannot save an empty note!");
         return;
       }
+    if (typeof($scope.text.tags) != "undefined") {
+      $scope.text.tags = $scope.text.tags.split(",");
+    }
     $scope.createdDate = new Date();
     $scope.category = "text";
     $http({
@@ -130,10 +133,14 @@ angular.module('noteeApp').controller('textInstanceCtrl', function ($scope, $uib
 angular.module('noteeApp').controller('listInstanceCtrl', function ($scope, $uibModalInstance,$http) {
   $scope.todo = {};
   $scope.todo.lists = [];
+  
   $scope.ok = function () {
     if($scope.todo.lists.length == 0) {
       alert("Cannot save an empty note!");
       return;
+    }
+    if (typeof($scope.todo.tags) != "undefined") {
+      $scope.todo.tags = $scope.todo.tags.split(",");
     }
     $scope.createdDate = new Date();
     $scope.category = "todo";
@@ -157,6 +164,11 @@ angular.module('noteeApp').controller('listInstanceCtrl', function ($scope, $uib
     $scope.list = null;
     $scope.todo.lists.push(list);
   };
+  $scope.keyPressed = function(event) {
+    if (event.keyCode == 13) {
+      $scope.add($scope.list);
+    }
+  }
   $scope.remove = function(index) { 
     $scope.todo.lists.splice(index, 1)     
   }
@@ -167,6 +179,9 @@ angular.module('noteeApp').controller('photoInstanceCtrl', function ($scope, $ui
     if(typeof($scope.photo) == "undefined") {
       alert("Cannot save an empty note!");
       return;
+    }
+    if (typeof($scope.photo.tags) != "undefined") {
+      $scope.photo.tags = $scope.photo.tags.split(",");
     }
     $scope.createdDate = new Date();
     $scope.category = "image";
@@ -221,6 +236,9 @@ angular.module('noteeApp').controller('linkInstanceCtrl', function ($scope, $uib
     if($scope.link.urls.length == 0) {
       alert("Cannot save an empty note!");
       return;
+    }
+    if (typeof($scope.link.tags) != "undefined") {
+      $scope.link.tags = $scope.link.tags.split(",");
     }
     $scope.createdDate = new Date();
     $scope.category = "links";

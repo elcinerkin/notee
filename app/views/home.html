@@ -52,7 +52,7 @@
         <input ng-show="list.content.length > 0" type="checkbox" ng-model="list.check" />
 	      <span ng-class="{strike:list.check}"> {{ list.content }}</span><br>   
 	      <button type="button" ng-show="list.content.length > 0" class="btn btn-default" ng-click="add(list)">Confirm</button></br>         
-	      <input type="text" placeholder="Enter your NEW list here" class="form-control" ng-model="list.content"><br>
+	      <input type="text" placeholder="Enter your NEW list here" class="form-control" ng-model="list.content" ng-keyup="keyPressed($event)"><br>
         <div class="modal-footer">
           <div>
               <button class="btn btn-primary" type="button" ng-click="ok()">Save</button>
