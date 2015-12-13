@@ -5,7 +5,11 @@ var express = require('express'),
 	methodOverride = require('method-override');
 
 var app = express();
-app.use(bodyParser());
+
+// Allow pass image string
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
+
 app.use(methodOverride());
 
 // Allow cross server script request

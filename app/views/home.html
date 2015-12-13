@@ -16,7 +16,7 @@
               <option value="#ffff4d">Yellow</option>
               <option value="#FF66FF">Purple</option>
             </select></br></br>
-           <textarea placeholder="Enter your Title" ng-model="text.content" class="form-control"></textarea>
+           <textarea placeholder="Enter your Content" ng-model="text.content" class="form-control"></textarea>
         </div>
         <div class="modal-footer">
           <button class="btn btn-primary" type="button" ng-click="ok()">Save</button>
@@ -25,7 +25,7 @@
     </script>
     <script type="text/ng-template" id="mylist.html">
         <div class="modal-header" style="background-color:{{todo.color}}">
-            <h3 class="modal-title">Check List</h3>
+            <h3 class="modal-title">Todo List</h3>
         </div>
         <div class="modal-body">
             <input type="text" placeholder="Enter your Title" class="form-control" ng-model="todo.title"></br>
@@ -52,7 +52,7 @@
         <input ng-show="list.content.length > 0" type="checkbox" ng-model="list.check" />
 	      <span ng-class="{strike:list.check}"> {{ list.content }}</span><br>   
 	      <button type="button" ng-show="list.content.length > 0" class="btn btn-default" ng-click="add(list)">Confirm</button></br>         
-	      <input type="text" placeholder="Enter your NEW list here" class="form-control" ng-model="list.content"><br>
+	      <input type="text" placeholder="Enter your NEW list here" class="form-control" ng-model="list.content" ng-keyup="keyPressed($event)"><br>
         <div class="modal-footer">
           <div>
               <button class="btn btn-primary" type="button" ng-click="ok()">Save</button>
@@ -76,9 +76,8 @@
               <option value="#ffff4d">Yellow</option>
               <option value="#FF66FF">Purple</option>
             </select><br /><br />
-            <input type="file" ng-model="photo.img"/>
-
-            <button class="btn btn-default btn-xs" type="button" ng-click="camera=true">Take a photo</button>
+            <input type="file" accept="image/*" file-model="photo.image" />
+            <button class="btn btn-default btn-xs" ng-hide="camera" type="button" ng-click="camera=true">Take a photo</button>
             <div ng-if="camera">
               <ng-camera
                   capture-message="Cheeeese!"
@@ -89,11 +88,11 @@
                   viewer-width="426"
                   image-format="jpeg"
                   jpeg-quality="100"
-                  action-message="Countdown 3s"
+                  action-message="Snapshot"
                   snapshot="vm.picture"
                   flash-fallback-url="../../bower_components/webcamjs/webcam.swf"
                   shutter-url="../media/shutter.mp3"></ng-camera>
-              <img ng-if="vm.picture" ng-src="{{vm.picture}}" alt="webcam picture">
+              <img ng-if="vm.picture" ng-src="{{vm.picture}}" alt="webcam picture" id="image">
             </div>
         </div>
         <div class="modal-footer">
@@ -119,16 +118,16 @@
 				<option value="#FF66FF">Purple</option>
 				</select><br>
 			<div ng-repeat="url in link.urls" }>
-				<a ng-src="{{ url.content }}"><span ng-hide="url.description.length > 0"> {{ url.content}} </span>{{ url.description }}</a>
+				<a href="{{ url.content }}"><span ng-hide="url.description.length > 0"> {{ url.content}} </span>{{ url.description }}</a>
 				<button class="btn btn-warning btn-xs" ng-click="remove($index)">remove</button>
 	        </div>       
             <span ng-show="url.content.length > 0">
-            	<a ng-src="{{ url.content }}"><span ng-hide="url.description.length > 0"> {{ url.content}} </span> {{ url.description }}
+            	<a href="{{ url.content }}"><span ng-hide="url.description.length > 0"> {{ url.content}} </span> {{ url.description }}
             	</a><br />
             </span><br>   
 	        <button type="button" ng-show="url.content.length > 0" class="btn btn-default" ng-click="add(url)">Confirm</button><br> <br>        
 	        <input type="text" placeholder="Add your URL here" class="form-control" ng-model="url.content"><br />
-	        <input type="text" placeholder="Add description" class="form-control" ng-model="url.description"><br />
+	        <input type="text" placeholder="Add description for the URL" class="form-control" ng-model="url.description"><br />
         </div>
         <div class="modal-footer">
           <div>
@@ -139,12 +138,7 @@
         </div>
     </script>
 </div>
-<div>Here are the data will be saved to backend
-	<div>{{ texts }}</div>
-	<div>{{ todos }}</div>
-	<div>{{ photos }}</div>
-	<div>{{ links }}</div>
-</div>
+
 
 <div class="row home-container">
 	<div class="col-xs-12" style="height: auto; background: none; border: 1px solid #ccc;">

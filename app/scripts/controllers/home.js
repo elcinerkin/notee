@@ -107,8 +107,11 @@ angular.module('noteeApp').controller('textInstanceCtrl', function ($scope, $uib
         alert("Cannot save an empty note!");
         return;
       }
+    if (typeof($scope.text.tags) != "undefined") {
+      $scope.text.tags = $scope.text.tags.split(",");
+    }
     $scope.createdDate = new Date();
-    $scope.category = "Plain Text";
+    $scope.category = "text";
     $http({
       method: 'POST',
       url: 'http://localhost:3030/api/notes',
@@ -130,13 +133,17 @@ angular.module('noteeApp').controller('textInstanceCtrl', function ($scope, $uib
 angular.module('noteeApp').controller('listInstanceCtrl', function ($scope, $uibModalInstance,$http) {
   $scope.todo = {};
   $scope.todo.lists = [];
+  
   $scope.ok = function () {
     if($scope.todo.lists.length == 0) {
       alert("Cannot save an empty note!");
       return;
     }
+    if (typeof($scope.todo.tags) != "undefined") {
+      $scope.todo.tags = $scope.todo.tags.split(",");
+    }
     $scope.createdDate = new Date();
-    $scope.category = "Todo List";
+    $scope.category = "todo";
     $http({
       method: 'POST',
       url: 'http://localhost:3030/api/notes',
@@ -157,6 +164,11 @@ angular.module('noteeApp').controller('listInstanceCtrl', function ($scope, $uib
     $scope.list = null;
     $scope.todo.lists.push(list);
   };
+  $scope.keyPressed = function(event) {
+    if (event.keyCode == 13) {
+      $scope.add($scope.list);
+    }
+  }
   $scope.remove = function(index) { 
     $scope.todo.lists.splice(index, 1)     
   }
@@ -167,21 +179,46 @@ angular.module('noteeApp').controller('photoInstanceCtrl', function ($scope, $ui
     if(typeof($scope.photo) == "undefined") {
       alert("Cannot save an empty note!");
       return;
-    $scope.createdDate = new Date();
-    $scope.category = "Image";
-    $http({
-      method: 'POST',
-      url: 'http://localhost:3030/api/notes',
-      data: { category: $scope.category,
-              createdDate:$scope.createdDate,
-              note: $scope.photo }
-      }).then(function successCallback(response) {
-        console.log(response);
-      }, function errorCallback(response) {
-        console.log(response);
-      });
     }
-  $uibModalInstance.dismiss('cancel');
+    if (typeof($scope.photo.tags) != "undefined") {
+      $scope.photo.tags = $scope.photo.tags.split(",");
+    }
+    $scope.createdDate = new Date();
+    $scope.category = "image";
+    if (typeof($scope.photo.image) == "undefined") {
+      $scope.photo.image = document.getElementById("image").src;
+      $http({
+        method: 'POST',
+        url: 'http://localhost:3030/api/notes',
+        data: { category: $scope.category,
+                createdDate:$scope.createdDate,
+                note: $scope.photo }
+        }).then(function successCallback(response) {
+          console.log(response);
+        }, function errorCallback(response) {
+          console.log(response);
+        });
+      $uibModalInstance.dismiss('cancel');
+    } else {
+      // convert File object to base64 string
+      var reader  = new FileReader();
+      reader.readAsDataURL($scope.photo.image);
+      reader.onloadend = function () {
+        $scope.photo.image = reader.result;
+        $http({
+          method: 'POST',
+          url: 'http://localhost:3030/api/notes',
+          data: { category: $scope.category,
+                  createdDate:$scope.createdDate,
+                  note: $scope.photo }
+          }).then(function successCallback(response) {
+            console.log(response);
+          }, function errorCallback(response) {
+            console.log(response);
+          });
+        $uibModalInstance.dismiss('cancel');
+      }
+    }
   };
   $scope.cancel = function () {
     $uibModalInstance.dismiss('cancel');
@@ -200,8 +237,11 @@ angular.module('noteeApp').controller('linkInstanceCtrl', function ($scope, $uib
       alert("Cannot save an empty note!");
       return;
     }
+    if (typeof($scope.link.tags) != "undefined") {
+      $scope.link.tags = $scope.link.tags.split(",");
+    }
     $scope.createdDate = new Date();
-    $scope.category = "Quick Links";
+    $scope.category = "links";
     $http({
       method: 'POST',
       url: 'http://localhost:3030/api/notes',
