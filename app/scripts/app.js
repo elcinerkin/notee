@@ -66,14 +66,9 @@ angular
         url:'/home',
         templateUrl: 'views/home.html',
         controller: 'HomeCtrl'
-      })
-      .state('contact', {
-        url:'/contact',
-        templateUrl: 'views/contact.html',
-        controller: 'ContactCtrl'
       });
 
-    $urlRouterProvider.otherwise('/home');
+    $urlRouterProvider.otherwise('/login');
 })
 
 .run(function($rootScope, LoginService, $location, $state) {
