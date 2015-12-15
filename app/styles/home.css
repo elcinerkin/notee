@@ -161,9 +161,11 @@
 	text-transform: capitalize;
 	background: #ccc;
 }
-.card .desc {
+.card .content {
 	padding: 5px;
 	width: 100%;
+}
+.card .desc {
 }
 .card .image-container {
 	text-align: center;

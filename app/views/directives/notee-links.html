@@ -1,0 +1,4 @@
+<div class="title" ng-if="card.note.title && card.note.title.length>0" ng-bind="card.note.title"></div>
+<div class="content" ng-repeat="link in card.note.urls">
+	<a ng-href="{{link.content}}" target="new">{{link.description}}</a>
+</div>

@@ -98,6 +98,26 @@ angular.module('noteeApp')
       });  
     }
     loadData();
+})
+.directive('noteeText', function() {
+  return {
+    templateUrl: '../../views/directives/notee-text.html'
+  };
+})
+.directive('noteeTodo', function() {
+  return {
+    templateUrl: '../../views/directives/notee-todo.html'
+  };
+})
+.directive('noteeImage', function() {
+  return {
+    templateUrl: '../../views/directives/notee-image.html'
+  };
+})
+.directive('noteeLinks', function() {
+  return {
+    templateUrl: '../../views/directives/notee-links.html'
+  };
 });
 
 

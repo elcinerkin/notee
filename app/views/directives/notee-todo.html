@@ -1,0 +1,8 @@
+<div class="title" ng-if="card.note.title && card.note.title.length>0" ng-bind="card.note.title"></div>
+<div class="todo-container content">
+	<div ng-repeat="todo in card.note.lists">
+		<label>
+			<input type="checkbox">{{todo.content}}
+		</label>
+	</div>
+</div>
