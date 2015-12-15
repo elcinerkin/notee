@@ -156,7 +156,7 @@ angular.module('noteeApp')
 angular.module('noteeApp').controller('textInstanceCtrl', function ($scope, $uibModalInstance, $http, ENV) {
   var API_NOTES_ENDPOINT = ENV.apiNotesEndpoint;
   $scope.ok = function () {
-    if(typeof($scope.text) == "undefined") {
+    if(typeof($scope.text) == "undefined" || typeof($scope.text.content) == "undefined") {
         alert("Cannot save an empty note!");
         return;
       }
@@ -215,6 +215,12 @@ angular.module('noteeApp').controller('listInstanceCtrl', function ($scope, $uib
     $uibModalInstance.dismiss('cancel');
   };
   $scope.add = function (list) {
+    if(typeof($scope.list.checked)=="undefined"){
+      $scope.list.checked = false;
+    }
+    if(typeof($scope.list.priority)=="undefined"){
+      $scope.list.priority = false;
+    }
     $scope.list = null;
     $scope.todo.lists.push(list);
   };
@@ -241,7 +247,12 @@ angular.module('noteeApp').controller('photoInstanceCtrl', function ($scope, $ui
     $scope.createdDate = new Date();
     $scope.category = "image";
     if (typeof($scope.photo.image) == "undefined") {
+      
       $scope.photo.image = document.getElementById("image").src;
+      // if(typeof(document.getElementById("image")) == "undefined"){
+      //   alert("Please upload a photo or take a snapshot!");
+      //   return;
+      // }
       $http({
         method: 'POST',
         url: API_NOTES_ENDPOINT,
@@ -289,7 +300,7 @@ angular.module('noteeApp').controller('linkInstanceCtrl', function ($scope, $uib
   $scope.link.urls = [];
 
   $scope.ok = function () {
-    if($scope.link.urls.length == 0) {
+    if($scope.link.urls.length == 0 || typeof($scope.link.title) == "undefined") {
       alert("Cannot save an empty note!");
       return;
     }
