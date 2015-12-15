@@ -113,6 +113,10 @@
 .strike {
     text-decoration: line-through;
   }
+.lists {
+	padding: 10px;
+	text-align: center;
+}
 .add-note-button {
 	padding: 0;
 	margin: 0;

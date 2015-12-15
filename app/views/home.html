@@ -28,7 +28,7 @@
             <h3 class="modal-title">Todo List</h3>
         </div>
         <div class="modal-body">
-            <input type="text" placeholder="Enter your Title" class="form-control" ng-model="todo.title"></br>
+            <input type="text" placeholder="Enter your Title" class="form-control" ng-model="todo.title" required></br>
             <input type="text" placeholder="Enter your Tags" class="form-control" ng-model="todo.tags"></br> 
             Choose your color: 
             <select ng-model="todo.color">
@@ -39,19 +39,24 @@
 				<option value="#99CCFF">Blue</option>
 				<option value="#ffff4d">Yellow</option>
 				<option value="#FF66FF">Purple</option>
-				</select><br>
-			<div ng-repeat="list in todo.lists" }>
-				<input ng-show="list.content.length > 0" type="checkbox" ng-model="list.check"/>
-				<span ng-class="{strike:list.check}">{{ list.content }}</span>
-        <div class="btn-group">
-          <label class="btn btn-danger btn-xs" ng-model="list.priority" uib-btn-radio="'true'">Priority High</label>
-          <label class="btn btn-default btn-xs" ng-model="list.priority" uib-btn-radio="'false'">Priority Low</label>
-        </div>
-        <button class="btn btn-warning btn-xs" ng-click="remove($index)">remove</button>
-	    </div>       
-        <input ng-show="list.content.length > 0" type="checkbox" ng-model="list.check" />
-	      <span ng-class="{strike:list.check}"> {{ list.content }}</span><br>   
-	      <button type="button" ng-show="list.content.length > 0" class="btn btn-default" ng-click="add(list)">Confirm</button></br>         
+				</select><br><br>
+      <table ng-repeat="list in todo.lists">
+        <tr><td class="col-xs-4">
+          <div class="btn-group">
+            <label class="btn btn-danger btn-xs" ng-model="list.priority" uib-btn-radio="'true'">Priority High</label>
+            <label class="btn btn-default btn-xs" ng-model="list.priority" uib-btn-radio="'false'">Priority Low</label>
+          </div></td>
+        <td>
+  				<input ng-show="list.content.length > 0" type="checkbox" ng-model="list.check"/>
+  				<span ng-class="{strike:list.check}">{{ list.content }}</span>
+        </td>
+        <td class="col-xs-1 col-xs-offset-4"><button class="btn btn-warning btn-xs" ng-click="remove($index)">remove</button></td></tr>
+	    </table>       
+        <div ng-show="list.content.length > 0">
+          <b>Preview: </b><input type="checkbox" ng-model="list.check" />
+  	      <span ng-class="{strike:list.check}"> {{ list.content }}</span>  
+  	      <button type="button" ng-show="list.content.length > 0" class="btn btn-primary btn-xs" ng-click="add(list)">Confirm</button>
+        </div><br>      
 	      <input type="text" placeholder="Enter your NEW list here" class="form-control" ng-model="list.content" ng-keyup="keyPressed($event)"><br>
         <div class="modal-footer">
           <div>
