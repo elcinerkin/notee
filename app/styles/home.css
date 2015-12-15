@@ -164,12 +164,63 @@
 .card .content {
 	padding: 5px;
 	width: 100%;
+	cursor: pointer;
 }
 .card .desc {
+}
+.card .todo {	
+	position: relative;
+}
+.todo input {
+	margin-right: 5px;
+}
+.todo .priority {
+	position: absolute;
+	right: 0;
+	height: 20px;
+}
+.priority label {
+	height: 20px;
+	padding: 1px 5px;
+	font-size: .8em;
 }
 .card .image-container {
 	text-align: center;
 }
 .card .image-container .image {
 	width: 100%;
+}
+.card .tags {
+	height: 35px;
+	padding: 4px;
+	margin: 5px;	
+	border: 1px dashed #bbb;
+	border-radius: 2px;
+}
+.tags span {
+	padding: 5px;
+	background: none;
+	font-weight: bold;
+}
+.tags ul {
+	padding: 0;
+	margin; 0;
+	display: inline-block;
+}
+.tags ul li {
+	list-style: none;
+	display: inline-block;
+	border-radius: 2px;
+	border: 1px solid #bbb;
+	margin: 2px;
+	padding: 0 5px;
+}
+.center-modal {
+    position: fixed;
+    top: 15%;
+    left: 18.5%;
+    z-index: 1050;
+    width: 80%;
+    height: 80%;
+    margin-left: -10%;
 }

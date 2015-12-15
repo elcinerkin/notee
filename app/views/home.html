@@ -183,7 +183,7 @@
 			<div class="cards-container col-xs-12 col-md-12" style="background: none;">
 				<div masonry class="row cards">
 					<div class="masonry-brick card-container col-xs-6 col-md-3" ng-repeat="card in pageData.cards track by $index">
-						<div class="card" style="background: #eee;" ng-switch="card.category">
+						<div class="card" style="background: #eee;" ng-switch="card.category" ng-click="viewData(card)">
 							<div ng-switch-when="text" notee-text></div>
               <div ng-switch-when="todo" notee-todo></div>
               <div ng-switch-when="image" notee-image></div>

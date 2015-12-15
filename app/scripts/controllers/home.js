@@ -97,7 +97,26 @@ angular.module('noteeApp')
         console.log(response);
       });  
     }
+
+    $scope.viewData = function(card){
+      console.log(card);
+      var modalInstance = $uibModal.open({
+        templateUrl: '../../views/view-note.html',
+        controller: 'viewCtrl',
+        windowClass: 'center-modal',
+        resolve: {
+            card: function() {
+            return card;
+          }
+        }         
+      });
+    }
+
     loadData();
+})
+.controller('viewCtrl', function($scope, card) {
+  console.log(card);
+  $scope.card = card;
 })
 .directive('noteeText', function() {
   return {

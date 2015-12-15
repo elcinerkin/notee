@@ -1,8 +1,13 @@
 <div class="title" ng-if="card.note.title && card.note.title.length>0" ng-bind="card.note.title"></div>
 <div class="todo-container content">
-	<div ng-repeat="todo in card.note.lists">
+	<div ng-repeat="todo in card.note.lists" class="todo" >
 		<label>
 			<input type="checkbox">{{todo.content}}
 		</label>
+		<span class="btn-group priority">
+	        <label class="btn btn-success" ng-model="todo.check" uib-btn-radio="'true'" uncheckable>High</label>
+	        <label class="btn btn-success" ng-model="todo.check" uib-btn-radio="'false'" uncheckable>Low</label>
+	    </span>
+		
 	</div>
 </div>
