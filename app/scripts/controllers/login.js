@@ -8,8 +8,9 @@
  * Controller of the noteeApp
  */
 angular.module('noteeApp')
-  .controller('LoginCtrl', function ($scope) {
-    $scope.pageData = {
-    	testData: "hello, notees!"
-    };
+  .controller('LoginCtrl', function ($scope, $window) {
+
+    $scope.redirectHome = function(googleUser) {    
+    	$window.location.href = '#/home';
+  	};
   });

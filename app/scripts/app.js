@@ -73,7 +73,7 @@ angular
         controller: 'ContactCtrl'
       });
 
-    $urlRouterProvider.otherwise('/login');
+    $urlRouterProvider.otherwise('/home');
 })
 
 .run(function($rootScope, LoginService, $location, $state) {
