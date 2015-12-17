@@ -20,9 +20,10 @@ angular
     'ui.bootstrap',
     'ui.router',
     'authentication.services',
-    'camera'
+    'camera',
+    'config'
   ])
-
+  
   .directive('fileModel', ['$parse', function ($parse) {
     return {
         restrict: 'A',

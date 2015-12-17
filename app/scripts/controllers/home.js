@@ -8,13 +8,16 @@
  * Controller of the noteeApp
  */
 angular.module('noteeApp')
-  .controller('HomeCtrl', function ($scope, $uibModal, $log, $http, $filter) {
+  .controller('HomeCtrl', function ($scope, $uibModal, $log, $http, $filter, ENV) {
     $scope.texts = [];
     $scope.todos = [];
     $scope.photos = [];
     $scope.links = [];
     $scope.search = {};
     $scope.searchDate = '';
+
+    var API_NOTES_ENDPOINT = ENV.apiNotesEndpoint;
+    console.log(ENV.apiNotesEndpoint);
 
     $scope.formatDate = function(){
       if($scope.searchDate && $scope.searchDate !== null){
@@ -96,7 +99,7 @@ angular.module('noteeApp')
     }
 
     var loadData = function(){
-      var getAllNotesPromise = $http.get("http://localhost:3030/api/notes");
+      var getAllNotesPromise = $http.get(API_NOTES_ENDPOINT);
       
       getAllNotesPromise.then(function successCallback(response) {
         //console.log(response);
@@ -163,7 +166,7 @@ angular.module('noteeApp').controller('textInstanceCtrl', function ($scope, $uib
     $scope.category = "text";
     $http({
       method: 'POST',
-      url: 'http://localhost:3030/api/notes',
+      url: API_NOTES_ENDPOINT,
       data: { category: $scope.category,
               createdDate:$scope.createdDate,
               note: $scope.text }
@@ -195,7 +198,7 @@ angular.module('noteeApp').controller('listInstanceCtrl', function ($scope, $uib
     $scope.category = "todo";
     $http({
       method: 'POST',
-      url: 'http://localhost:3030/api/notes',
+      url: API_NOTES_ENDPOINT,
       data: { category: $scope.category,
               createdDate:$scope.createdDate,
               note: $scope.todo }
@@ -238,7 +241,7 @@ angular.module('noteeApp').controller('photoInstanceCtrl', function ($scope, $ui
       $scope.photo.image = document.getElementById("image").src;
       $http({
         method: 'POST',
-        url: 'http://localhost:3030/api/notes',
+        url: API_NOTES_ENDPOINT,
         data: { category: $scope.category,
                 createdDate:$scope.createdDate,
                 note: $scope.photo }
@@ -256,7 +259,7 @@ angular.module('noteeApp').controller('photoInstanceCtrl', function ($scope, $ui
         $scope.photo.image = reader.result;
         $http({
           method: 'POST',
-          url: 'http://localhost:3030/api/notes',
+          url: API_NOTES_ENDPOINT,
           data: { category: $scope.category,
                   createdDate:$scope.createdDate,
                   note: $scope.photo }
@@ -293,7 +296,7 @@ angular.module('noteeApp').controller('linkInstanceCtrl', function ($scope, $uib
     $scope.category = "links";
     $http({
       method: 'POST',
-      url: 'http://localhost:3030/api/notes',
+      url: API_NOTES_ENDPOINT,
       data: { category: $scope.category,
               createdDate:$scope.createdDate,
               note: $scope.link }
