@@ -156,7 +156,7 @@ angular.module('noteeApp')
 angular.module('noteeApp').controller('textInstanceCtrl', function ($scope, $uibModalInstance, $http, ENV) {
   var API_NOTES_ENDPOINT = ENV.apiNotesEndpoint;
   $scope.ok = function () {
-    if(typeof($scope.text) == "undefined") {
+    if(typeof($scope.text) == "undefined" || typeof($scope.text.content) == "undefined") {
         alert("Cannot save an empty note!");
         return;
       }
@@ -176,6 +176,7 @@ angular.module('noteeApp').controller('textInstanceCtrl', function ($scope, $uib
       }, function errorCallback(response) {
         console.log(response);
     });
+    $scope.loadData();
     $uibModalInstance.dismiss('cancel');
   };
   $scope.cancel = function () {
@@ -209,12 +210,19 @@ angular.module('noteeApp').controller('listInstanceCtrl', function ($scope, $uib
       }, function errorCallback(response) {
         console.log(response);
     });
+    $scope.loadData();
     $uibModalInstance.dismiss('cancel');
   };
   $scope.cancel = function () {
     $uibModalInstance.dismiss('cancel');
   };
   $scope.add = function (list) {
+    if(typeof($scope.list.checked)=="undefined"){
+      $scope.list.checked = false;
+    }
+    if(typeof($scope.list.priority)=="undefined"){
+      $scope.list.priority = false;
+    }
     $scope.list = null;
     $scope.todo.lists.push(list);
   };
@@ -240,6 +248,10 @@ angular.module('noteeApp').controller('photoInstanceCtrl', function ($scope, $ui
     }
     $scope.createdDate = new Date();
     $scope.category = "image";
+    if (typeof($scope.photo.image) == "undefined" && document.getElementById("image") == null) {
+      alert("Please upload a photo or take a snapshot!");
+      return;
+    }
     if (typeof($scope.photo.image) == "undefined") {
       $scope.photo.image = document.getElementById("image").src;
       $http({
@@ -253,6 +265,7 @@ angular.module('noteeApp').controller('photoInstanceCtrl', function ($scope, $ui
         }, function errorCallback(response) {
           console.log(response);
         });
+      $scope.loadData();
       $uibModalInstance.dismiss('cancel');
     } else {
       // convert File object to base64 string
@@ -271,6 +284,7 @@ angular.module('noteeApp').controller('photoInstanceCtrl', function ($scope, $ui
           }, function errorCallback(response) {
             console.log(response);
           });
+        $scope.loadData();
         $uibModalInstance.dismiss('cancel');
       }
     }
@@ -289,7 +303,7 @@ angular.module('noteeApp').controller('linkInstanceCtrl', function ($scope, $uib
   $scope.link.urls = [];
 
   $scope.ok = function () {
-    if($scope.link.urls.length == 0) {
+    if($scope.link.urls.length == 0 || typeof($scope.link.title) == "undefined") {
       alert("Cannot save an empty note!");
       return;
     }
@@ -309,6 +323,7 @@ angular.module('noteeApp').controller('linkInstanceCtrl', function ($scope, $uib
       }, function errorCallback(response) {
         console.log(response);
     });
+    $scope.loadData();
     $uibModalInstance.dismiss('cancel');
   };
   $scope.cancel = function () {
