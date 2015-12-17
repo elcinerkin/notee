@@ -98,7 +98,7 @@ angular.module('noteeApp')
      $scope.stubbedData.cards[i] = newCard;
     }
 
-    var loadData = function(){
+    $scope.loadData = function(){
       var getAllNotesPromise = $http.get(API_NOTES_ENDPOINT);
       
       getAllNotesPromise.then(function successCallback(response) {
@@ -125,7 +125,7 @@ angular.module('noteeApp')
       });
     }
 
-    loadData();
+    $scope.loadData();
 })
 .controller('viewCtrl', function($scope, card) {
   console.log(card);

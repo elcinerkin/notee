@@ -1,5 +1,6 @@
 <div class="view-note-container" >
 	<div class="card" style="background: #eee;" ng-switch="card.category">
+		<!-- <notee-delete note="card._id"></notee-delete> -->
 		<div ng-switch-when="text" notee-text></div>
 		<div ng-switch-when="todo" notee-todo></div>
 		<div ng-switch-when="image" notee-image></div>

@@ -150,10 +150,16 @@
 	background: white;
 }
 .card {
+	position: relative;
 	padding: 0;
 	margin: 0;
 	border: 1px solid #eee;
 }
+/*.card>span{
+	position: absolute;
+	top: 15px;
+	right: 15px;
+}*/
 .card .title {
 	padding: 5px;
 	text-align: center;
