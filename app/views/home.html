@@ -162,13 +162,17 @@
 			<div class="col-xs-12 col-md-6" style="max-height: 100px; background: #ccc;">
 				<div class="row">
 					<div class="col-xs-12 col-md-6 search-note">
-						<input class="search-note-input" type="text" placeholder="search here..." />
+						<input class="search-note-input" type="text" placeholder="search here..." ng-model="search.$" />
+            <!-- <a class="clear" ng-click="search.$ = ''">
+                <span class="glyphicon glyphicon-remove-sign"></span>
+            </a> -->
 					</div>
 					<div class="col-xs-6 col-md-3 search-note" style="font-size: .8em;">
-						<input class="search-note-input" type="date" />
+						<input class="search-note-input" type="date" ng-model="searchDate" ng-change='formatDate()' />
 					</div>
 					<div class="col-xs-6 col-md-3 search-note">
-						<select class="search-note-input">
+						<select class="search-note-input" ng-model="search.category">
+              <option value="">All</option>
 							<option value="text">Plain Text</option>
 							<option value="todo">Todo List</option>
 							<option value="image">Image</option>
@@ -182,7 +186,8 @@
 		<div class="row" style="background: none;">
 			<div class="cards-container col-xs-12 col-md-12" style="background: none;">
 				<div masonry class="row cards">
-					<div class="masonry-brick card-container col-xs-6 col-md-3" ng-repeat="card in pageData.cards track by $index">
+					<div class="masonry-brick card-container col-xs-6 col-md-3"
+                ng-repeat="card in pageData.cards | filter:search:strict track by $index">
 						<div class="card" style="background: #eee;" ng-switch="card.category" ng-click="viewData(card)">
 							<div ng-switch-when="text" notee-text></div>
               <div ng-switch-when="todo" notee-todo></div>

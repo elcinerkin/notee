@@ -8,11 +8,21 @@
  * Controller of the noteeApp
  */
 angular.module('noteeApp')
-  .controller('HomeCtrl', function ($scope, $uibModal, $log, $http) {
+  .controller('HomeCtrl', function ($scope, $uibModal, $log, $http, $filter) {
     $scope.texts = [];
     $scope.todos = [];
     $scope.photos = [];
     $scope.links = [];
+    $scope.search = {};
+    $scope.searchDate = '';
+
+    $scope.formatDate = function(){
+      if($scope.searchDate && $scope.searchDate !== null){
+        $scope.search.createdDate = $filter('date')($scope.searchDate, 'yyyy-MM-dd');
+      } else{
+        $scope.search.createdDate = '';
+      }      
+    };
 
     $scope.addText = function () {
       var modalInstance = $uibModal.open({
