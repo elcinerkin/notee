@@ -176,7 +176,7 @@ angular.module('noteeApp').controller('textInstanceCtrl', function ($scope, $uib
       }, function errorCallback(response) {
         console.log(response);
     });
-    location.reload();
+    $scope.loadData();
     $uibModalInstance.dismiss('cancel');
   };
   $scope.cancel = function () {
@@ -210,7 +210,7 @@ angular.module('noteeApp').controller('listInstanceCtrl', function ($scope, $uib
       }, function errorCallback(response) {
         console.log(response);
     });
-    location.reload();
+    $scope.loadData();
     $uibModalInstance.dismiss('cancel');
   };
   $scope.cancel = function () {
@@ -265,7 +265,7 @@ angular.module('noteeApp').controller('photoInstanceCtrl', function ($scope, $ui
         }, function errorCallback(response) {
           console.log(response);
         });
-      location.reload();
+      $scope.loadData();
       $uibModalInstance.dismiss('cancel');
     } else {
       // convert File object to base64 string
@@ -284,7 +284,7 @@ angular.module('noteeApp').controller('photoInstanceCtrl', function ($scope, $ui
           }, function errorCallback(response) {
             console.log(response);
           });
-        location.reload();
+        $scope.loadData();
         $uibModalInstance.dismiss('cancel');
       }
     }
@@ -323,7 +323,7 @@ angular.module('noteeApp').controller('linkInstanceCtrl', function ($scope, $uib
       }, function errorCallback(response) {
         console.log(response);
     });
-    location.reload();
+    $scope.loadData();
     $uibModalInstance.dismiss('cancel');
   };
   $scope.cancel = function () {
