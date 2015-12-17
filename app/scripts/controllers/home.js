@@ -176,6 +176,7 @@ angular.module('noteeApp').controller('textInstanceCtrl', function ($scope, $uib
       }, function errorCallback(response) {
         console.log(response);
     });
+    location.reload();
     $uibModalInstance.dismiss('cancel');
   };
   $scope.cancel = function () {
@@ -209,6 +210,7 @@ angular.module('noteeApp').controller('listInstanceCtrl', function ($scope, $uib
       }, function errorCallback(response) {
         console.log(response);
     });
+    location.reload();
     $uibModalInstance.dismiss('cancel');
   };
   $scope.cancel = function () {
@@ -246,13 +248,12 @@ angular.module('noteeApp').controller('photoInstanceCtrl', function ($scope, $ui
     }
     $scope.createdDate = new Date();
     $scope.category = "image";
+    if (typeof($scope.photo.image) == "undefined" && document.getElementById("image") == null) {
+      alert("Please upload a photo or take a snapshot!");
+      return;
+    }
     if (typeof($scope.photo.image) == "undefined") {
-      
       $scope.photo.image = document.getElementById("image").src;
-      // if(typeof(document.getElementById("image")) == "undefined"){
-      //   alert("Please upload a photo or take a snapshot!");
-      //   return;
-      // }
       $http({
         method: 'POST',
         url: API_NOTES_ENDPOINT,
@@ -264,6 +265,7 @@ angular.module('noteeApp').controller('photoInstanceCtrl', function ($scope, $ui
         }, function errorCallback(response) {
           console.log(response);
         });
+      location.reload();
       $uibModalInstance.dismiss('cancel');
     } else {
       // convert File object to base64 string
@@ -282,6 +284,7 @@ angular.module('noteeApp').controller('photoInstanceCtrl', function ($scope, $ui
           }, function errorCallback(response) {
             console.log(response);
           });
+        location.reload();
         $uibModalInstance.dismiss('cancel');
       }
     }
@@ -320,6 +323,7 @@ angular.module('noteeApp').controller('linkInstanceCtrl', function ($scope, $uib
       }, function errorCallback(response) {
         console.log(response);
     });
+    location.reload();
     $uibModalInstance.dismiss('cancel');
   };
   $scope.cancel = function () {
