@@ -153,7 +153,8 @@ angular.module('noteeApp')
 });
 
 
-angular.module('noteeApp').controller('textInstanceCtrl', function ($scope, $uibModalInstance, $http) {
+angular.module('noteeApp').controller('textInstanceCtrl', function ($scope, $uibModalInstance, $http, ENV) {
+  var API_NOTES_ENDPOINT = ENV.apiNotesEndpoint;
   $scope.ok = function () {
     if(typeof($scope.text) == "undefined") {
         alert("Cannot save an empty note!");
@@ -182,7 +183,8 @@ angular.module('noteeApp').controller('textInstanceCtrl', function ($scope, $uib
   };
 });
 
-angular.module('noteeApp').controller('listInstanceCtrl', function ($scope, $uibModalInstance,$http) {
+angular.module('noteeApp').controller('listInstanceCtrl', function ($scope, $uibModalInstance,$http, ENV) {
+  var API_NOTES_ENDPOINT = ENV.apiNotesEndpoint;
   $scope.todo = {};
   $scope.todo.lists = [];
   
@@ -226,7 +228,8 @@ angular.module('noteeApp').controller('listInstanceCtrl', function ($scope, $uib
   }
  });
 
-angular.module('noteeApp').controller('photoInstanceCtrl', function ($scope, $uibModalInstance,$http) {
+angular.module('noteeApp').controller('photoInstanceCtrl', function ($scope, $uibModalInstance,$http, ENV) {
+  var API_NOTES_ENDPOINT = ENV.apiNotesEndpoint;
   $scope.ok = function () {
     if(typeof($scope.photo) == "undefined") {
       alert("Cannot save an empty note!");
@@ -280,7 +283,8 @@ angular.module('noteeApp').controller('photoInstanceCtrl', function ($scope, $ui
   vm.picture = false; // Initial state
 });
 
-angular.module('noteeApp').controller('linkInstanceCtrl', function ($scope, $uibModalInstance,$http) {
+angular.module('noteeApp').controller('linkInstanceCtrl', function ($scope, $uibModalInstance,$http, ENV) {
+  var API_NOTES_ENDPOINT = ENV.apiNotesEndpoint;
   $scope.link = {};
   $scope.link.urls = [];
 
