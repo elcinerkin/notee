@@ -83,6 +83,7 @@
 .card .image-container {
 	padding: 0;
 	text-align: center;
+	cursor: pointer;
 }
 .card .image-container .image {
 	width: 100%;
