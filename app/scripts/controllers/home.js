@@ -33,8 +33,8 @@ angular.module('noteeApp')
         controller: 'textInstanceCtrl'
       });
 
-      modalInstance.result.then(function (text) {
-        $scope.texts.push(text);
+      modalInstance.result.then(function () {
+        $scope.loadData();
       }, function () {
         $log.info('Modal dismissed at: ' + new Date());
       });
@@ -46,8 +46,8 @@ angular.module('noteeApp')
         controller: 'listInstanceCtrl'
       });
 
-      modalInstance.result.then(function (todo) {
-        $scope.todos.push(todo);
+      modalInstance.result.then(function () {
+        $scope.loadData();
       }, function () {
         $log.info('Modal dismissed at: ' + new Date());
       });
@@ -58,8 +58,8 @@ angular.module('noteeApp')
         controller: 'photoInstanceCtrl'
       });
 
-      modalInstance.result.then(function (photo) {
-        $scope.photos.push(photo);
+      modalInstance.result.then(function () {
+        $scope.loadData();
       }, function () {
         $log.info('Modal dismissed at: ' + new Date());
       });
@@ -69,8 +69,8 @@ angular.module('noteeApp')
         templateUrl: 'mylink.html',
         controller: 'linkInstanceCtrl'
       });
-      modalInstance.result.then(function (link) {
-        $scope.links.push(link);
+      modalInstance.result.then(function () {
+        $scope.loadData();
       }, function () {
         $log.info('Modal dismissed at: ' + new Date());
       });
@@ -172,12 +172,10 @@ angular.module('noteeApp').controller('textInstanceCtrl', function ($scope, $uib
               createdDate:$scope.createdDate,
               note: $scope.text }
       }).then(function successCallback(response) {
-        console.log(response);        
+        $uibModalInstance.close();
       }, function errorCallback(response) {
         console.log(response);
     });
-    $scope.loadData();
-    $uibModalInstance.dismiss('cancel');
   };
   $scope.cancel = function () {
     $uibModalInstance.dismiss('cancel');
@@ -206,12 +204,10 @@ angular.module('noteeApp').controller('listInstanceCtrl', function ($scope, $uib
               createdDate:$scope.createdDate,
               note: $scope.todo }
       }).then(function successCallback(response) {
-        console.log(response);
+        $uibModalInstance.close();
       }, function errorCallback(response) {
         console.log(response);
     });
-    $scope.loadData();
-    $uibModalInstance.dismiss('cancel');
   };
   $scope.cancel = function () {
     $uibModalInstance.dismiss('cancel');
@@ -261,12 +257,10 @@ angular.module('noteeApp').controller('photoInstanceCtrl', function ($scope, $ui
                 createdDate:$scope.createdDate,
                 note: $scope.photo }
         }).then(function successCallback(response) {
-          console.log(response);
+          $uibModalInstance.close();
         }, function errorCallback(response) {
           console.log(response);
         });
-      $scope.loadData();
-      $uibModalInstance.dismiss('cancel');
     } else {
       // convert File object to base64 string
       var reader  = new FileReader();
@@ -280,12 +274,10 @@ angular.module('noteeApp').controller('photoInstanceCtrl', function ($scope, $ui
                   createdDate:$scope.createdDate,
                   note: $scope.photo }
           }).then(function successCallback(response) {
-            console.log(response);
+            $uibModalInstance.close();
           }, function errorCallback(response) {
             console.log(response);
           });
-        $scope.loadData();
-        $uibModalInstance.dismiss('cancel');
       }
     }
   };
@@ -319,12 +311,10 @@ angular.module('noteeApp').controller('linkInstanceCtrl', function ($scope, $uib
               createdDate:$scope.createdDate,
               note: $scope.link }
       }).then(function successCallback(response) {
-        console.log(response);
+        $uibModalInstance.close();
       }, function errorCallback(response) {
         console.log(response);
     });
-    $scope.loadData();
-    $uibModalInstance.dismiss('cancel');
   };
   $scope.cancel = function () {
     $uibModalInstance.dismiss('cancel');
