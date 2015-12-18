@@ -167,12 +167,10 @@
 	text-transform: capitalize;
 	background: #ccc;
 }
-.card .content {
+.card .desc {
 	padding: 5px;
 	width: 100%;
 	cursor: pointer;
-}
-.card .desc {
 }
 .card .todo {	
 	position: relative;
