@@ -8,7 +8,7 @@
  * Controller of the noteeApp
  */
 angular.module('noteeApp')
-  .controller('HomeCtrl', function ($scope, $uibModal, $log, $http, $filter, ENV) {
+  .controller('HomeCtrl', function ($scope, $uibModal, $log, $http, $filter, ENV, $rootScope) {
     $scope.texts = [];
     $scope.todos = [];
     $scope.photos = [];
@@ -79,25 +79,7 @@ angular.module('noteeApp')
     $scope.pageData = {
       cards: []
     };
-    $scope.stubbedData = {
-       cards: [],
-       config: {}
-    };    
-    var card = {
-     title: "card title ",
-     desc: "card description ",
-     imageUrl: "http://cdn.mobileswall.com/wp-content/uploads/2013/12/900-Black-Iron-Man-l.jpg"
-    }
-    for(var i=0; i<30; i++){
-     //var newCard = card;
-     var newCard = new Object();
-     newCard.id = i+1;
-     newCard.title = card.title + (i+1).toString();
-     newCard.desc = card.desc + (i+1).toString();
-     if(i%3==0) newCard.imageUrl = card.imageUrl;
-     $scope.stubbedData.cards[i] = newCard;
-    }
-
+    
     $scope.loadData = function(){
       var getAllNotesPromise = $http.get(API_NOTES_ENDPOINT);
       
@@ -111,9 +93,10 @@ angular.module('noteeApp')
       });  
     }
 
+    $scope.viewModal = '';
     $scope.viewData = function(card){
       console.log(card);
-      var modalInstance = $uibModal.open({
+      $scope.viewModal = $uibModal.open({
         templateUrl: '../../views/view-note.html',
         controller: 'viewCtrl',
         windowClass: 'center-modal',
@@ -124,6 +107,20 @@ angular.module('noteeApp')
         }         
       });
     }
+
+    $scope.updateCard = function(card){
+      var updateNotePromise = $http.put(API_NOTES_ENDPOINT + '/' + card._id, card);
+      updateNotePromise.then(function(){
+        console.log('update successful');
+      }, function(){
+        console.log('update failed');
+      });
+    }
+
+    $rootScope.$on('noteDeleted', function(){
+      $scope.viewModal.dismiss('noteDeleted');
+      $scope.loadData();
+    });    
 
     $scope.loadData();
 })

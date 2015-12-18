@@ -1,5 +1,5 @@
 angular.module('noteeApp')
-.directive('noteeDelete', ['$http', 'ENV', function($http, ENV) {
+.directive('noteeDelete', ['$http', 'ENV', '$rootScope', function($http, ENV, $rootScope) {
   function link(scope, element, attrs){
   	element.css({
   		position: 'absolute',
@@ -16,7 +16,7 @@ angular.module('noteeApp')
 	  		var deleteNoteUrl = API_NOTES_ENDPOINT + '/' + scope.note;
 	  		$http.delete(deleteNoteUrl).then(function(response){  			
 	  			console.log("delete successful");
-	  			scope.$parent.loadData();
+	  			$rootScope.$emit('noteDeleted');	  			
 	  		}, function(response){
 	  			console.log("delete failed");
 	  		})

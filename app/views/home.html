@@ -144,7 +144,7 @@
 </div>
 
 
-<div class="row home-container">
+<div class="row home-container box-shadow--8dp">
 	<div class="col-xs-12" style="height: auto; background: none; border: 1px solid #ccc;">
 		<div class="row" style="margin-bottom: 15px; max-height: 100px; background: none;">
 			<div class="col-xs-12 col-md-6" style="max-height: 100px; background: #ccc;">
@@ -192,8 +192,14 @@
 				<div masonry class="row cards">
 					<div class="masonry-brick card-container col-xs-6 col-md-3"
                 ng-repeat="card in pageData.cards | filter:search:strict track by $index">
-						<div class="card" style="background: #eee;" ng-switch="card.category" ng-click="viewData(card)">
+						<div class="card box-shadow--4dp" style="background: #eee;" ng-switch="card.category">
               <notee-delete note="card._id"></notee-delete>
+              <div class="title" 
+                    style="{{ 'background:' + card.note.color + ';'}}" 
+                    ng-if="card.note.title && card.note.title.length>0" 
+                    ng-bind="card.note.title" 
+                    ng-click="viewData(card)">
+              </div>
 							<div ng-switch-when="text" notee-text></div>
               <div ng-switch-when="todo" notee-todo></div>
               <div ng-switch-when="image" notee-image></div>

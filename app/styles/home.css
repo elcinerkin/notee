@@ -1,111 +1,6 @@
-/*.home-container {
-	padding: 0;
-	margin: 0 auto;
-	width: 100%;
+.home-container {
+	margin-bottom: 60px;
 }
-.column {
-	display: inline-block;
-	vertical-align: top;
-	border: 1px solid black;
-}
-.left-col, .right-col {
-	padding: 0;
-	margin: 0;
-	width: 24%;
-}
-.middle-col {
-	padding: 5px;
-	margin: 5px;
-	width: 100%;
-}
-.cards {
-	padding: 5px;
-}
-.card {
-	padding: 2px;
-	margin: 5px 0;
-	border: 1px solid lightgray;
-}
-.card .title {
-	padding: 2px;
-	width: 100%;
-}
-.card .desc {
-	padding: 2px;
-	width: 100%;
-}
-.card .image-container {
-	text-align: center;
-}
-.card .image-container .image {
-	width: 100%;
-}
-.middle-cards-container {
-
-}
-.middle-cards-container .cards .card-container {
-	width: 24%;
-	display: inline-block;
-	vertical-align: top;
-}
-.middle-cards-container .cards .card-container .card {
-	width: 100%;
-	margin: 5px 0;
-}
-
-.search-add-container {
-	padding: 5px;
-	margin: 5px;
-	width: 100%;
-	border: 1px solid lightgray;
-}
-.add {
-	width: 58%;
-	display: inline-block;
-}
-.search {
-	width: 38%;
-	display: inline-block;
-}
-.add {
-	padding: 5px;
-	margin: 5px;
-}
-.add .add-title {
-	width: 100%;
-}
-.add .add-buttons {
-	width: 100%;
-}
-.add-buttons li {
-	display: inline-block;
-	list-style: none;
-	width: 24%;
-}
-.search .filter {
-	display: inline-block;
-}
-.search .text {
-	width: 100px;
-	margin-bottom: 5px;
-}
-.search .date {
-	width: 50px;
-	margin-right: 5px;
-}
-.search .category {
-	width: 75px;
-}
-.search .text .search-text {
-	width: 100%;
-}
-.search .text .search-date {
-	width: 100%;
-}
-.search .text .search-category {
-	width: 100%;
-}
-*/
 .add-note {
 	padding: 8px;
 	background: none;
@@ -153,19 +48,16 @@
 	position: relative;
 	padding: 0;
 	margin: 0;
-	border: 1px solid #eee;
 }
-/*.card>span{
-	position: absolute;
-	top: 15px;
-	right: 15px;
-}*/
 .card .title {
 	padding: 5px;
 	text-align: center;
 	width: 100%;
 	text-transform: capitalize;
-	background: #ccc;
+	cursor: pointer;
+}
+.card .content {
+	padding: 10px;
 }
 .card .desc {
 	padding: 5px;
@@ -189,10 +81,15 @@
 	font-size: .8em;
 }
 .card .image-container {
+	padding: 0;
 	text-align: center;
 }
 .card .image-container .image {
 	width: 100%;
+}
+.card .link {
+	display: block;
+	padding: 2px 0;
 }
 .card .tags {
 	height: 35px;
