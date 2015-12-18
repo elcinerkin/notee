@@ -47,7 +47,7 @@ module.exports = function (grunt) {
         constants: {
           ENV: {
             name: 'development',
-            apiNotesEndpoint: 'http://localhost:3030/api/notes'
+            apiNotesEndpoint: 'http://54.201.224.158:3030/api/notes'
           }
         }
       },
