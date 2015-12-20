@@ -6,7 +6,7 @@
         </div>
         <div class="modal-body">
         	<input type="text" placeholder="Enter your Title" class="form-control" ng-model="text.title"></br>
-           <input type="text" placeholder="Enter your Tags" class="form-control" ng-model="text.tags"></br>
+           <input type="text" placeholder="Enter your Tags (eg: abc, abc)" class="form-control" ng-model="text.tags"></br>
            Choose your color: <select ng-model="text.color" class="">
               <option value="#FFFFFF" selected>White</option>
               <option value="#FF5050"></span><span style="color:FF5050">Red</span></option>
@@ -29,7 +29,7 @@
         </div>
         <div class="modal-body">
             <input type="text" placeholder="Enter your Title" class="form-control" ng-model="todo.title"></br>
-            <input type="text" placeholder="Enter your Tags" class="form-control" ng-model="todo.tags"></br> 
+            <input type="text" placeholder="Enter your Tags (eg: abc, abc)" class="form-control" ng-model="todo.tags"></br> 
             Choose your color: 
             <select ng-model="todo.color">
 				<option value="#FFFFFF" selected>White</option>
@@ -70,7 +70,7 @@
         </div>
         <div class="modal-body">
         	<input type="text" placeholder="Enter your Title" class="form-control" ng-model="photo.title"></br>
-           <input type="text" placeholder="Enter your Tags" class="form-control" ng-model="photo.tags"></br>
+           <input type="text" placeholder="Enter your Tags (eg: abc, abc)" class="form-control" ng-model="photo.tags"></br>
            Choose your color: <select ng-model="photo.color" class="">
               <option value="#FFFFFF" selected>White</option>
               <option value="#FF5050"></span><span style="color:FF5050">Red</span></option>
@@ -110,7 +110,7 @@
         </div>
         <div class="modal-body">
             <input type="text" placeholder="Enter your Title" class="form-control" ng-model="link.title"><br />
-            <input type="text" placeholder="Enter your Tags" class="form-control" ng-model="link.tags"><br /> 
+            <input type="text" placeholder="Enter your Tags (eg: abc, abc)" class="form-control" ng-model="link.tags"><br /> 
             Choose your color: 
             <select ng-model="link.color">
 				<option value="#FFFFFF" selected>White</option>
@@ -150,16 +150,16 @@
 			<div class="col-xs-12 col-md-6" style="max-height: 100px; background: #ccc;">
 				<div class="row text-center">
 					<div class="col-xs-6 col-md-3 add-note">
-						<button ng-click="addText()" class="add-note-button">+ Text</button>
+						<button ng-click="addText()" class="add-note-button"><span class="glyphicon glyphicon-pencil"></span> Text</button>
 					</div>
 					<div class="col-xs-6 col-md-3 add-note">
-						<button ng-click="addList()" class="add-note-button">+ ToDo</button>
+						<button ng-click="addList()" class="add-note-button"><span class="glyphicon glyphicon-list"></span>  ToDo</button>
 					</div>
 					<div class="col-xs-6 col-md-3 add-note">
-						<button ng-click="addPhoto()" class="add-note-button">+ Image</button>
+						<button ng-click="addPhoto()" class="add-note-button"><span class="glyphicon glyphicon-picture"></span>  Image</button>
 					</div>
 					<div class="col-xs-6 col-md-3 add-note">
-						<button ng-click="addLink()" class="add-note-button">+ Links</button>
+						<button ng-click="addLink()" class="add-note-button"><span class="glyphicon glyphicon-link"></span> Links</button>
 					</div>
 				</div>
 			</div>
