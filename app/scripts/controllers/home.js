@@ -16,6 +16,7 @@ angular.module('noteeApp')
     $scope.search = {};
     $scope.searchDate = '';
     $scope.editMode = false;
+    $scope.edit = { enabled: false };
 
     var API_NOTES_ENDPOINT = ENV.apiNotesEndpoint;
     
@@ -122,7 +123,8 @@ angular.module('noteeApp')
     };
 
     $rootScope.$on('noteDeleted', function(){
-      $scope.viewModal.dismiss('noteDeleted');
+      if($scope.viewModal)
+        $scope.viewModal.dismiss('noteDeleted');
       $scope.loadData();
     });
 
@@ -133,11 +135,16 @@ angular.module('noteeApp')
 
     $scope.loadData();
 })
-.controller('ViewCtrl', function($timeout, $rootScope, $scope, card) {
+.controller('ViewCtrl', function($log, $http, ENV, $timeout, $rootScope, $scope, card) {
   console.log(card);
-  $scope.edit = { enabled: false, newTag: '' };
+  var API_NOTES_ENDPOINT = ENV.apiNotesEndpoint;
+  $scope.edit = { 
+    enabled: false, 
+    cardChanged: false, 
+    newTag: '' 
+  };
   $scope.card = card;
-  $scope.originalCard = card;
+  $scope.originalCard = JSON.stringify(card);
 
   $rootScope.$on('toggleEditMode', function(){
         $scope.$apply(function(){
@@ -148,7 +155,8 @@ angular.module('noteeApp')
 
   $scope.addTag = function(tag){
     console.log("Adding tag - " + tag);
-    $scope.card.note.tags.push(tag);    
+    $scope.card.note.tags.push(tag);
+    $scope.edit.cardChanged = true;    
     $scope.edit.newTag = '';        
   };
 
@@ -164,14 +172,40 @@ angular.module('noteeApp')
     }
   };
 
+  $scope.$watch('card.note.title', function(newValue, oldValue){
+    if(newValue !== oldValue){
+      $scope.edit.cardChanged = true;
+    }
+    console.log('card changed: ' + $scope.edit.cardChanged);
+  }, true);
+
+  $scope.$watch('card.note.content', function(newValue, oldValue){
+    if(newValue !== oldValue){
+      $scope.edit.cardChanged = true;
+    }    
+  }, true);
+
   $scope.updateCard = function(card){
-      var updateNotePromise = $http.put(API_NOTES_ENDPOINT + '/' + card._id, card);
-      updateNotePromise.then(function(){
-        $log.info('update successful');
-      }, function(){
-        $log.info('update failed');
-      });      
-    }  
+    if(JSON.stringify(card) === $scope.originalCard){
+      console.log('card did not change. returning...');
+      return;
+    };
+    var updateNotePromise = $http.put(API_NOTES_ENDPOINT + '/' + card._id, card);
+    updateNotePromise.then(function(){
+      $scope.edit.cardChanged = false;
+      $log.info('update successful');
+    }, function(){
+      $log.info('update failed');
+    });      
+  };
+
+  $scope.cancel = function(){
+    if($scope.edit.cardChanged){
+      $scope.card = {};
+      $scope.card = $scope.originalCard;      
+    }
+    $scope.edit.enabled=false;
+  };  
 })
 .directive('noteeText', function() {
   return {

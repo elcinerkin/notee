@@ -17,16 +17,16 @@
 						{{tag}}
 						<span ng-show="edit.enabled" class="glyphicon glyphicon-remove-circle" ng-click="deleteTag($index)"></span>
 					</li>
-				</ul>
-				<div ng-show="edit.enabled">
-					<input type="text" class="new-tag" ng-model="edit.newTag" placeholder="Add a Tag" ng-keyup="keyPressed($event, edit.newTag)" />
-					<span class="btn btn-xs btn-primary" ng-click="addTag(edit.newTag)" ng-disabled="edit.newTag.length<=0">Add Tag</span>
-				</div>
+				</ul>				
+			</div>
+			<div ng-show="edit.enabled">
+				<input type="text" class="new-tag" ng-model="edit.newTag" placeholder="Add a Tag" ng-keyup="keyPressed($event, edit.newTag)" />
+				<span class="btn btn-xs btn-primary" ng-click="addTag(edit.newTag)" ng-disabled="edit.newTag.length<=0">Add Tag</span>
 			</div>
 		</div>
 		<div ng-show="edit.enabled" class="edit-buttons row">
-			<div class="col-md-offset-6 col-md-3 btn btn-primary update">Update</div>
-			<div class="col-md-3 btn btn-default cancel" ng-click="edit.enabled=false">Cancel</div>
+			<div class="col-md-offset-6 col-md-3 btn btn-primary update" ng-click="updateCard(card)" ng-disabled="!edit.cardChanged">Update</div>
+			<div class="col-md-3 btn btn-default cancel" ng-click="cancel()">Done</div>
 		</div>
 	</div>
 </div>
