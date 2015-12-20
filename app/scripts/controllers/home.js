@@ -363,7 +363,7 @@ angular.module('noteeApp').controller('linkInstanceCtrl', function ($scope, $uib
   $scope.link.urls = [];
 
   $scope.ok = function () {
-    if($scope.link.urls.length == 0 || typeof($scope.link.title) == "undefined") {
+    if($scope.link.urls.length == 0) {
       alert("Cannot save an empty note!");
       return;
     }
