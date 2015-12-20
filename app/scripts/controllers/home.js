@@ -8,7 +8,7 @@
  * Controller of the noteeApp
  */
 angular.module('noteeApp')
-  .controller('HomeCtrl', function ($scope, $uibModal, $log, $http, $filter, ENV, $rootScope) {
+  .controller('HomeCtrl', function ($scope, $uibModal, $log, $http, $filter, ENV, $rootScope, $window) {
     $scope.texts = [];
     $scope.todos = [];
     $scope.photos = [];
@@ -16,6 +16,7 @@ angular.module('noteeApp')
     $scope.search = {};
     $scope.searchDate = '';
     $scope.editMode = false;
+    $scope.user = "";
 
     var API_NOTES_ENDPOINT = ENV.apiNotesEndpoint;
     
@@ -78,6 +79,11 @@ angular.module('noteeApp')
     
     $scope.pageData = {
       cards: []
+    };
+
+    $scope.redirectHome = function(googleUser) {    
+      $window.location.href = '#/home';
+      $scope.user = googleUser;
     };
     
     $scope.loadData = function(){

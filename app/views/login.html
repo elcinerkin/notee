@@ -17,23 +17,20 @@
   <p class="lead">
     A new way to manage your notes.
   </p>
-  <div ng-controller="LoginCtrl" id="loginElement"></div>
+  <div ng-controller="HomeCtrl" id="loginElement"></div>
   <div id="center" class="g-signin2" data-onsuccess="onSignIn" ></div>
   <script>
 	  function onSignIn(googleUser) {
 	    // Useful data for your client-side scripts:
 	    var profile = googleUser.getBasicProfile();
-	    console.log("ID: " + profile.getId()); // Don't send this directly to your server!
-	    console.log("Name: " + profile.getName());
-	    console.log("Image URL: " + profile.getImageUrl());
-	    console.log("Email: " + profile.getEmail());
+	    var user = profile.getEmail();
 
 	    // The ID token you need to pass to your backend:
-	    var id_token = googleUser.getAuthResponse().id_token;
-	    console.log("ID Token: " + id_token);
+	    // var id_token = googleUser.getAuthResponse().id_token;
+	    // console.log("ID Token: " + id_token);
 
 		var scope = angular.element($("#loginElement")).scope();
-		scope.redirectHome();
+		scope.redirectHome(user);
   	  };
   </script>
 
