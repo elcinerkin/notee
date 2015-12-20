@@ -1,9 +1,10 @@
 <div class="todo-container content">
-	<div ng-repeat="todo in card.note.lists | orderBy:'-priority'" class="todo" >
-		<label ng-class="todo.checked == true ? 'strike': ''">
-			<input type="checkbox" ng-model="todo.checked" ng-change="updateCard(card)">{{todo.content}}
+	<div ng-repeat="todo in card.note.lists | orderBy:'-priority'" class="todo">
+		<input type="checkbox" ng-model="todo.checked" ng-change="updateCard(card)">
+		<label ng-class="todo.checked == true ? 'strike': ''" ng-click="stopPropagation($event)" contenteditable ng-model="todo.content">
+			<!-- {{todo.content}} -->
 		</label>
-		<span class="btn-group priority">
+		<span class="btn-group priority" ng-click="stopPropagation($event)">
 	        <label class="btn btn-xs" ng-class="todo.priority == 'true' ? 'btn-danger': 'btn-default'" ng-model="todo.priority" uib-btn-radio="'true'" uncheckable ng-change="updateCard(card)">High</label>
 	        <label class="btn btn-xs" ng-class="todo.priority == 'false' ? 'btn-danger': 'btn-default'" ng-model="todo.priority" uib-btn-radio="'false'" uncheckable ng-change="updateCard(card)">Low</label>
 	    </span>		

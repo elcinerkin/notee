@@ -1,18 +1,32 @@
-<div class="view-note-container" >
+<div class="view-note-container">
 	<div class="card" style="background: #eee;" ng-switch="card.category">
+		<notee-edit note="card._id"></notee-edit>
 		<notee-delete note="card._id"></notee-delete>
-		<div class="title" style="{{ 'background:' + card.note.color + ';'}}" ng-if="card.note.title && card.note.title.length>0" ng-bind="card.note.title"></div>
+		<div class="title" style="{{ 'background:' + card.note.color + ';'}}" ng-if="card.note.title && card.note.title.length>0" ng-bind="card.note.title" contenteditable={{edit.enabled}} ng-model="card.note.title" ></div>
 		<div ng-switch-when="text" notee-text></div>
 		<div ng-switch-when="todo" notee-todo></div>
 		<div ng-switch-when="image" notee-image></div>
 		<div ng-switch-when="links" notee-links></div>
 		<div ng-switch-default></div>              
 
-		<div class="tags" ng-if="card.note.tags && card.note.tags.length>0">
-			<span>Tags</span>
-			<ul>
-				<li ng-repeat="tag in card.note.tags" ng-bind="tag"></li>
-			</ul>
+		<div class="tags-container">
+			<div class="tags" ng-if="card.note.tags && card.note.tags.length>0">
+				<span>Tags</span>
+				<ul>
+					<li ng-repeat="tag in card.note.tags track by $index">
+						{{tag}}
+						<span ng-show="edit.enabled" class="glyphicon glyphicon-remove-circle" ng-click="deleteTag($index)"></span>
+					</li>
+				</ul>
+				<div ng-show="edit.enabled">
+					<input type="text" class="new-tag" ng-model="edit.newTag" placeholder="Add a Tag" ng-keyup="keyPressed($event, edit.newTag)" />
+					<span class="btn btn-xs btn-primary" ng-click="addTag(edit.newTag)" ng-disabled="edit.newTag.length<=0">Add Tag</span>
+				</div>
+			</div>
 		</div>
-	</div>	
+		<div ng-show="edit.enabled" class="edit-buttons row">
+			<div class="col-md-offset-6 col-md-3 btn btn-primary update">Update</div>
+			<div class="col-md-3 btn btn-default cancel" ng-click="edit.enabled=false">Cancel</div>
+		</div>
+	</div>
 </div>

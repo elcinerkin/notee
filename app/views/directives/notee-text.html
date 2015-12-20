@@ -1,1 +1,2 @@
-<div class="content desc" ng-bind="card.note.content"></div>
+<div class="content" ng-bind="card.note.content" contenteditable={{edit.enabled}} ng-model="card.note.content"></div>
+<!-- <div ng-show="!edit.enabled" class="content" ng-bind="card.note.content" ng-model="card.note.content"></div> -->

@@ -38,4 +38,35 @@ angular.module('noteeApp')
   	template: "<span class='glyphicon glyphicon-trash' ></span>",
   	link: link
   };
+}])
+.directive('noteeEdit', ['$http', 'ENV', '$rootScope', function($http, ENV, $rootScope) {
+  function link(scope, element, attrs){
+    element.css({
+      position: 'absolute',
+      display: 'none',
+      top: '7px',
+      left: '10px',
+      zIndex: '999',
+      cursor: 'pointer'
+    });
+    element.bind('click', function(event){
+      event.stopPropagation();
+      $rootScope.$emit('toggleEditMode');
+    });
+    element.parent().bind('mouseenter', function() {
+        element.show();
+    });
+    element.parent().bind('mouseleave', function() {
+         element.hide();
+    });
+  }
+
+  return {
+    scope: {
+      note: '='
+    },
+    transclude: true,
+    template: "<span class='glyphicon glyphicon-edit' ></span>",
+    link: link
+  };
 }]);
