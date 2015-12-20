@@ -8,18 +8,17 @@
  * Controller of the noteeApp
  */
 angular.module('noteeApp')
-  .controller('HomeCtrl', function ($scope, $uibModal, $log, $http, $filter, ENV, $rootScope, $window) {
+  .controller('HomeCtrl', function ($scope, $uibModal, $log, $http, $filter, ENV, $rootScope) {
     $scope.texts = [];
     $scope.todos = [];
     $scope.photos = [];
     $scope.links = [];
     $scope.search = {};
     $scope.searchDate = '';
-    $scope.editMode = false;
-    $scope.user = "";
 
     var API_NOTES_ENDPOINT = ENV.apiNotesEndpoint;
-    
+    console.log(ENV.apiNotesEndpoint);
+
     $scope.formatDate = function(){
       if($scope.searchDate && $scope.searchDate !== null){
         $scope.search.createdDate = $filter('date')($scope.searchDate, 'yyyy-MM-dd');
@@ -80,11 +79,6 @@ angular.module('noteeApp')
     $scope.pageData = {
       cards: []
     };
-
-    $scope.redirectHome = function(googleUser) {    
-      $window.location.href = '#/home';
-      $scope.user = googleUser;
-    };
     
     $scope.loadData = function(){
       var getAllNotesPromise = $http.get(API_NOTES_ENDPOINT);
@@ -104,7 +98,7 @@ angular.module('noteeApp')
       console.log(card);
       $scope.viewModal = $uibModal.open({
         templateUrl: '../../views/view-note.html',
-        controller: 'ViewCtrl',
+        controller: 'viewCtrl',
         windowClass: 'center-modal',
         resolve: {
             card: function() {
@@ -117,67 +111,22 @@ angular.module('noteeApp')
     $scope.updateCard = function(card){
       var updateNotePromise = $http.put(API_NOTES_ENDPOINT + '/' + card._id, card);
       updateNotePromise.then(function(){
-        $log.info('update successful');
+        console.log('update successful');
       }, function(){
-        $log.info('update failed');
-      });      
+        console.log('update failed');
+      });
     }
-
-    $scope.stopPropagation = function(event){
-      event.stopPropagation();
-    };
 
     $rootScope.$on('noteDeleted', function(){
       $scope.viewModal.dismiss('noteDeleted');
       $scope.loadData();
-    });
-
-    // $rootScope.$on('toggleEditMode', function(){
-    //   $scope.editMode = !$scope.editMode;      
-    //   console.log($scope.editMode);
-    // });    
+    });    
 
     $scope.loadData();
 })
-.controller('ViewCtrl', function($timeout, $rootScope, $scope, card) {
+.controller('viewCtrl', function($scope, card) {
   console.log(card);
-  $scope.edit = { enabled: false, newTag: '' };
   $scope.card = card;
-  $scope.originalCard = card;
-
-  $rootScope.$on('toggleEditMode', function(){
-        $scope.$apply(function(){
-          $scope.edit.enabled = !$scope.edit.enabled;      
-          console.log($scope.edit.enabled);
-        });                
-    });
-
-  $scope.addTag = function(tag){
-    console.log("Adding tag - " + tag);
-    $scope.card.note.tags.push(tag);    
-    $scope.edit.newTag = '';        
-  };
-
-  $scope.deleteTag = function(index){
-    console.log("Deleting tag: " + $scope.card.note.tags[index]);
-    $scope.card.note.tags.splice(index, 1);
-  };
-
-  $scope.keyPressed = function(event, tag) {
-    if (event.keyCode == 13) {
-      console.log(tag);
-      $scope.addTag(tag);
-    }
-  };
-
-  $scope.updateCard = function(card){
-      var updateNotePromise = $http.put(API_NOTES_ENDPOINT + '/' + card._id, card);
-      updateNotePromise.then(function(){
-        $log.info('update successful');
-      }, function(){
-        $log.info('update failed');
-      });      
-    }  
 })
 .directive('noteeText', function() {
   return {
@@ -198,26 +147,6 @@ angular.module('noteeApp')
   return {
     templateUrl: '../../views/directives/notee-links.html'
   };
-})
-.directive("contenteditable", function() {
-  return {
-    restrict: "A",
-    require: "ngModel",
-    link: function(scope, element, attrs, ngModel) {
-
-      function read() {
-        ngModel.$setViewValue(element.html());
-      }
-
-      ngModel.$render = function() {
-        element.html(ngModel.$viewValue || "");
-      };
-
-      element.bind("blur keyup change", function() {
-        scope.$apply(read);
-      });
-    }
-  };
 });
 
 
@@ -230,6 +159,9 @@ angular.module('noteeApp').controller('textInstanceCtrl', function ($scope, $uib
       }
     if (typeof($scope.text.tags) != "undefined") {
       $scope.text.tags = $scope.text.tags.split(",");
+    }
+    if (typeof($scope.text.title) == "undefined") {
+      $scope.text.title = " ";
     }
     $scope.createdDate = new Date();
     $scope.category = "text";
@@ -262,6 +194,9 @@ angular.module('noteeApp').controller('listInstanceCtrl', function ($scope, $uib
     }
     if (typeof($scope.todo.tags) != "undefined") {
       $scope.todo.tags = $scope.todo.tags.split(",");
+    }
+    if (typeof($scope.todo.title) == "undefined") {
+      $scope.todo.title = " ";
     }
     $scope.createdDate = new Date();
     $scope.category = "todo";
@@ -309,6 +244,9 @@ angular.module('noteeApp').controller('photoInstanceCtrl', function ($scope, $ui
     }
     if (typeof($scope.photo.tags) != "undefined") {
       $scope.photo.tags = $scope.photo.tags.split(",");
+    }
+    if (typeof($scope.photo.title) == "undefined") {
+      $scope.photo.title = " ";
     }
     $scope.createdDate = new Date();
     $scope.category = "image";
@@ -369,6 +307,9 @@ angular.module('noteeApp').controller('linkInstanceCtrl', function ($scope, $uib
     }
     if (typeof($scope.link.tags) != "undefined") {
       $scope.link.tags = $scope.link.tags.split(",");
+    }
+    if (typeof($scope.link.title) == "undefined") {
+      $scope.link.title = " ";
     }
     $scope.createdDate = new Date();
     $scope.category = "links";
