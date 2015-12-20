@@ -99,7 +99,7 @@ angular.module('noteeApp')
       console.log(card);
       $scope.viewModal = $uibModal.open({
         templateUrl: '../../views/view-note.html',
-        controller: 'viewCtrl',
+        controller: 'ViewCtrl',
         windowClass: 'center-modal',
         resolve: {
             card: function() {
