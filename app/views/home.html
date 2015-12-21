@@ -81,7 +81,7 @@
               <option value="#FF66FF">Purple</option>
             </select><br /><br />
             <input type="file" accept="image/*" file-model="photo.image" />
-            <button class="btn btn-default btn-xs" ng-hide="camera" type="button" ng-click="camera=true">Take a photo</button>
+            <button class="btn btn-default btn-xs hidden-xs" ng-hide="camera" type="button" ng-click="camera=true">Take a photo</button>
             <div ng-if="camera">
               <ng-camera
                   capture-message="Cheeeese!"
