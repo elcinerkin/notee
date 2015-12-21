@@ -2,7 +2,7 @@
 	<div class="card" style="background: #eee;" ng-switch="card.category">
 		<notee-edit note="card._id"></notee-edit>
 		<notee-delete note="card._id"></notee-delete>
-		<div class="title" style="{{ 'background:' + card.note.color + ';'}}" ng-if="card.note.title && card.note.title.length>0" contenteditable={{edit.enabled}} ng-model="card.note.title" ng-keydown="this.blur()"></div>
+		<div class="title" style="{{ 'background:' + card.note.color + ';'}}" contenteditable={{edit.enabled}} ng-model="card.note.title" ng-keydown="this.blur()"></div>
 		<div ng-switch-when="text" notee-text></div>
 		<div ng-switch-when="todo" notee-todo></div>
 		<div ng-switch-when="image" notee-image></div>

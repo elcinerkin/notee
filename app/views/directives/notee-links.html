@@ -1,10 +1,12 @@
 <div class="content links">
 	<span ng-show="!edit.enabled" ng-click="stopPropagation($event)"><a class="link" ng-repeat="link in card.note.urls" ng-href="{{link.content}}" target="new">{{ (link.description && link.description.length>0) ? link.description : link.content }}</a></span>
+	
 	<div class="" style="margin-bottom: 10px; text-align: center;" ng-show="edit.enabled" ng-repeat="link in card.note.urls">
 		<input class="" type="text" style="vertical-align: top; width: 40%; margin-right: 10px;" ng-model="link.description"></span>
 		<input class="" type="text" style="vertical-align: top; width: 40%;" ng-model="link.content"></span>
 		<span style="cursor: pointer;" class="glyphicon glyphicon-remove-circle" ng-click="deleteLink($index)"></span>
 	</div>
+	
 	<div style="margin-bottom: 10px; text-align: center;" ng-show="edit.enabled">
 		<div><button class="btn btn-xs btn-primary" ng-click="addLink(edit.newLink)" ng-disabled="edit.newLink.content.length<=0">Add Link</button></div>
 		<input class="" type="text" style="vertical-align: top; width: 40%; margin-right: 10px;" ng-model="edit.newLink.description" placeholder="add a description to url" />

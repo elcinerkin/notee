@@ -196,7 +196,6 @@
               <notee-delete note="card._id"></notee-delete>
               <div class="title" 
                     style="{{ 'background:' + card.note.color + ';'}}" 
-                    ng-if="card.note.title && card.note.title.length>0" 
                     ng-bind="card.note.title">
               </div>
 							<div ng-switch-when="text" notee-text></div>

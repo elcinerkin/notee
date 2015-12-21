@@ -1,19 +1,19 @@
 <div class="todo-container content">
 	<div ng-repeat="todo in card.note.lists | orderBy:'-priority'" class="todo">
 	
+		<label ng-show="!edit.enabled" ng-class="todo.checked == true ? 'strike': ''" ng-click="stopPropagation($event)" ><input type="checkbox" ng-model="todo.checked" ng-change="updateCard(card)">{{todo.content}}</label>
 
-	<label ng-show="!edit.enabled" ng-class="todo.checked == true ? 'strike': ''" ng-click="stopPropagation($event)" ><input type="checkbox" ng-model="todo.checked" ng-change="updateCard(card)">{{todo.content}}</label>
-
-	<div ng-show="edit.enabled">
-		<input type="checkbox" ng-model="todo.checked" ng-change="updateCard(card)" ng-click="stopPropagation($event)">
-		<label ng-class="todo.checked == true ? 'strike': ''" ng-click="stopPropagation($event)" ng-model="todo.content" contenteditable={{edit.enabled}} ></label>
-	</div>
+		<div ng-show="edit.enabled">
+			<input type="checkbox" ng-model="todo.checked" ng-change="updateCard(card)" ng-click="stopPropagation($event)">
+			<label ng-class="todo.checked == true ? 'strike': ''" ng-click="stopPropagation($event)" ng-model="todo.content" contenteditable={{edit.enabled}} ></label>
+		</div>
+		<span style="cursor: pointer;" ng-show="edit.enabled" class="glyphicon glyphicon-remove-circle" ng-click="deleteTodo($index)"></span>
 
 		<span class="btn-group priority" ng-click="stopPropagation($event)">
 	        <label class="btn btn-xs" ng-class="todo.priority == 'true' ? 'btn-danger': 'btn-default'" ng-model="todo.priority" uib-btn-radio="'true'" uncheckable ng-change="updateCard(card)">High</label>
 	        <label class="btn btn-xs" ng-class="todo.priority == 'false' ? 'btn-danger': 'btn-default'" ng-model="todo.priority" uib-btn-radio="'false'" uncheckable ng-change="updateCard(card)">Low</label>
 	    </span>
-	    <span style="cursor: pointer;" ng-show="edit.enabled" class="glyphicon glyphicon-remove-circle" ng-click="deleteTodo($index)"></span>		
+	    		
 	</div>
 	<div ng-show="edit.enabled">
 		<input type="text" class="new-tag" ng-model="edit.newTodo.content" placeholder="add an item here" ng-keyup="keyPressedOnAddItem($event, edit.newTodo)" />

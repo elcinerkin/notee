@@ -8,7 +8,7 @@
  * Controller of the noteeApp
  */
 angular.module('noteeApp')
-  .controller('HomeCtrl', function ($scope, $uibModal, $log, $http, $filter, ENV, $rootScope) {
+  .controller('HomeCtrl', function ($scope, $uibModal, $log, $http, $filter, ENV, $rootScope, $window) {
     $scope.texts = [];
     $scope.todos = [];
     $scope.photos = [];
@@ -16,9 +16,16 @@ angular.module('noteeApp')
     $scope.search = {};
     $scope.searchDate = '';
     $scope.edit = { enabled: false };
+    $scope.user = "";
 
     var API_NOTES_ENDPOINT = ENV.apiNotesEndpoint;
     console.log(ENV.apiNotesEndpoint);
+
+    $scope.redirectHome = function(googleUser) {    
+      $window.location.href = '#/home';
+      $scope.user = googleUser;
+      console.log("userEmail: "+$scope.user)
+     };
 
     $scope.formatDate = function(){
       if($scope.searchDate && $scope.searchDate !== null){
@@ -82,7 +89,20 @@ angular.module('noteeApp')
     };
     
     $scope.loadData = function(){
-      var getAllNotesPromise = $http.get(API_NOTES_ENDPOINT);
+      var config = {
+        headers: {
+          category: 'todo'
+        }
+      }
+
+      var appendUserEmail = function(url){
+        if($scope.user && $scope.user.length>0)
+          return url.concat("/"+$scope.user);
+        else
+          return url;
+      };
+
+      var getAllNotesPromise = $http.get(appendUserEmail(API_NOTES_ENDPOINT));
       
       getAllNotesPromise.then(function successCallback(response) {
         //console.log(response);
@@ -219,24 +239,12 @@ angular.module('noteeApp')
     }
   };
 
-  // $scope.$watch('card.note.title', function(newValue, oldValue){
-  //   if(newValue !== oldValue){
-  //     $scope.edit.cardChanged = true;
-  //   }
-  //   console.log('card changed: ' + $scope.edit.cardChanged);
-  // }, true);
-
-  // $scope.$watch('card.note.content', function(newValue, oldValue){
-  //   if(newValue !== oldValue){
-  //     $scope.edit.cardChanged = true;
-  //   }    
-  // }, true);
-
   $scope.updateCard = function(card){
     var updateNotePromise = $http.put(API_NOTES_ENDPOINT + '/' + card._id, card);
     updateNotePromise.then(function(){
       $log.info('update successful');
       $scope.originalCard = JSON.stringify(card);
+      $scope.edit.enabled = false;
     }, function(){
       $log.info('update failed');
     });      

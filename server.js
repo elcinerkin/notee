@@ -55,6 +55,14 @@ var Notes = restful.model('notes', schema);
 Notes.methods(['post', 'get', 'put', 'delete']);
 Notes.register(app, '/api/notes');
 
+app.get('/api/notes/:loggedInUser', function (req, res) {
+  //var loggedInUser = req.headers.userId;
+  Notes.find({ email: (req.params.loggedInUser) ? req.params.loggedInUser : '' }, function(err, notes){
+    if(err) throw err;
+    res.send(notes);  
+  })
+});
+
 app.listen(3030);
 console.log("Server is running at port 3030");
 

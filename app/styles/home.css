@@ -80,8 +80,14 @@
 .card .todo {	
 	position: relative;
 }
+.todo div {
+	display: inline-block;
+}
 .todo input {
 	margin-right: 5px;
+}
+.todo span {
+	display: inline-block;
 }
 .todo .priority {
 	position: absolute;
@@ -156,7 +162,7 @@
 }
 .center-modal {
     position: fixed;
-    top: 10%;
+    top: 0;
     left: 18.5%;
     z-index: 1050;
     width: 80%;
