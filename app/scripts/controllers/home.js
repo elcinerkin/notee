@@ -118,6 +118,10 @@ angular.module('noteeApp')
       });
     }
 
+    $scope.stopPropagation = function(event){
+      event.stopPropagation();
+    }
+
     $rootScope.$on('noteDeleted', function(){
       if($scope.viewModal)
         $scope.viewModal.dismiss('noteDeleted');
@@ -142,6 +146,10 @@ angular.module('noteeApp')
       content: '',
       checked: false,
       priority: 'false'
+    },
+    newLink: {
+      content: '',
+      description: ''
     } 
   };
   $scope.card = card;
@@ -172,6 +180,16 @@ angular.module('noteeApp')
     };
   };
 
+  $scope.addLink = function(link){
+    console.log("Adding link - " + link.content);
+    $scope.card.note.urls.push(link);
+    $scope.edit.cardChanged = true;
+    $scope.edit.newLink = {
+      content: '',
+      description: ''
+    }
+  }
+
   $scope.deleteTag = function(index){
     console.log("Deleting tag: " + $scope.card.note.tags[index]);
     $scope.card.note.tags.splice(index, 1);
@@ -180,6 +198,11 @@ angular.module('noteeApp')
   $scope.deleteTodo = function(index){
     console.log("Deleting list item: " + $scope.card.note.lists[index]);
     $scope.card.note.lists.splice(index, 1);
+  }
+
+  $scope.deleteLink = function(index){
+    console.log("Deleting link: " + $scope.card.note.urls[index]);
+    $scope.card.note.urls.splice(index, 1); 
   }
 
   $scope.keyPressed = function(event, tag) {

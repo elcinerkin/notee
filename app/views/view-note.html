@@ -28,6 +28,6 @@
 			<div class="col-md-offset-6 col-md-3 btn btn-primary update" ng-click="updateCard(card)" ng-disabled="!edit.cardChanged">Update</div>
 			<div class="col-md-3 btn btn-default cancel" ng-click="cancel()">Cancel</div>
 		</div>
-		<div ng-bind="card.createdDate | date: 'MM/dd/yyyy @ h:mma'"></div>
+		<div class="created-date" ng-bind="card.createdDate | date: 'MM/dd/yyyy @ h:mma'"></div>
 	</div>
 </div>

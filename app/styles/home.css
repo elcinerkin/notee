@@ -16,6 +16,11 @@
 	background: white;
 	border: none;
 	border-radius: 5px;
+	color: #777;
+}
+.add-note-button span {
+	margin-right: 5px;
+	font-size: 1.1em;	
 }
 .search-note {
 	padding: 8px;
@@ -134,6 +139,11 @@
 }
 .tags new-tag {
 	margin: 10px; 
+}
+.created-date {
+	padding: 5px 10px;
+	text-align: right;
+	color: #bbb;
 }
 .card .edit-buttons {
 	text-align: center;
