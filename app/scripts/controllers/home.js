@@ -122,17 +122,27 @@ angular.module('noteeApp')
       if($scope.viewModal)
         $scope.viewModal.dismiss('noteDeleted');
       $scope.loadData();
-    });    
+    }); 
+
+    $rootScope.$on('reloadData', function(){
+      console.log('reload');
+      $('#cardsMasonry').masonry();
+    });   
 
     $scope.loadData();
 })
-.controller('ViewCtrl', function($log, $http, ENV, $timeout, $rootScope, $scope, card) {
+.controller('ViewCtrl', function($uibModalInstance, $log, $http, ENV, $timeout, $rootScope, $scope, card) {
   console.log(card);
   var API_NOTES_ENDPOINT = ENV.apiNotesEndpoint;
   $scope.edit = { 
     enabled: false, 
-    cardChanged: false, 
-    newTag: '' 
+    cardChanged: true, 
+    newTag: '',
+    newTodo: {
+      content: '',
+      checked: false,
+      priority: 'false'
+    } 
   };
   $scope.card = card;
   $scope.originalCard = JSON.stringify(card);
@@ -151,10 +161,26 @@ angular.module('noteeApp')
     $scope.edit.newTag = '';        
   };
 
+  $scope.addTodo = function(todo){
+    console.log("Adding item - " + todo.content);
+    $scope.card.note.lists.push(todo);
+    $scope.edit.cardChanged = true;    
+    $scope.edit.newTodo = {
+      content: '',
+      checked: false,
+      priority: 'false'
+    };
+  };
+
   $scope.deleteTag = function(index){
     console.log("Deleting tag: " + $scope.card.note.tags[index]);
     $scope.card.note.tags.splice(index, 1);
   };
+
+  $scope.deleteTodo = function(index){
+    console.log("Deleting list item: " + $scope.card.note.lists[index]);
+    $scope.card.note.lists.splice(index, 1);
+  }
 
   $scope.keyPressed = function(event, tag) {
     if (event.keyCode == 13) {
@@ -163,40 +189,47 @@ angular.module('noteeApp')
     }
   };
 
-  $scope.$watch('card.note.title', function(newValue, oldValue){
-    if(newValue !== oldValue){
-      $scope.edit.cardChanged = true;
+  $scope.keyPressedOnAddItem = function(event, todo) {
+    if (event.keyCode == 13) {
+      console.log(todo);
+      $scope.addTodo(todo);
     }
-    console.log('card changed: ' + $scope.edit.cardChanged);
-  }, true);
+  };
 
-  $scope.$watch('card.note.content', function(newValue, oldValue){
-    if(newValue !== oldValue){
-      $scope.edit.cardChanged = true;
-    }    
-  }, true);
+  // $scope.$watch('card.note.title', function(newValue, oldValue){
+  //   if(newValue !== oldValue){
+  //     $scope.edit.cardChanged = true;
+  //   }
+  //   console.log('card changed: ' + $scope.edit.cardChanged);
+  // }, true);
+
+  // $scope.$watch('card.note.content', function(newValue, oldValue){
+  //   if(newValue !== oldValue){
+  //     $scope.edit.cardChanged = true;
+  //   }    
+  // }, true);
 
   $scope.updateCard = function(card){
-    if(JSON.stringify(card) === $scope.originalCard){
-      console.log('card did not change. returning...');
-      return;
-    };
     var updateNotePromise = $http.put(API_NOTES_ENDPOINT + '/' + card._id, card);
     updateNotePromise.then(function(){
-      $scope.edit.cardChanged = false;
       $log.info('update successful');
+      $scope.originalCard = JSON.stringify(card);
     }, function(){
       $log.info('update failed');
     });      
   };
 
   $scope.cancel = function(){
-    if($scope.edit.cardChanged){
-      $scope.card = {};
-      $scope.card = $scope.originalCard;      
-    }
+    console.log();
+    $scope.card = JSON.parse($scope.originalCard);
     $scope.edit.enabled=false;
-  };  
+  };
+
+  $uibModalInstance.result.then(function(){
+    $rootScope.$emit("reloadData");
+  }, function(){
+    $rootScope.$emit("reloadData");
+  });
 })
 .directive('noteeText', function() {
   return {

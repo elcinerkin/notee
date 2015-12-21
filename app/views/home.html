@@ -189,7 +189,7 @@
 
 		<div class="row" style="background: none;">
 			<div class="cards-container col-xs-12 col-md-12" style="background: none;">
-				<div masonry class="row cards">
+				<div masonry id="cardsMasonry" class="row cards">
 					<div class="masonry-brick card-container col-xs-6 col-md-3"
                 ng-repeat="card in pageData.cards | filter:search:strict track by $index">
 						<div class="card box-shadow--4dp" style="background: #eee;" ng-switch="card.category" ng-click="viewData(card)">

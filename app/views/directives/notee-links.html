@@ -1,3 +1,7 @@
 <div class="content links">
-	<span ng-click="stopPropagation($event)"><a class="link" ng-repeat="link in card.note.urls" ng-href="{{link.content}}" target="new">{{ (link.description && link.description.length>0) ? link.description : link.content }}</a></span>
+	<span ng-show="!edit.enabled" ng-click="stopPropagation($event)"><a class="link" ng-repeat="link in card.note.urls" ng-href="{{link.content}}" target="new">{{ (link.description && link.description.length>0) ? link.description : link.content }}</a></span>
+	<div style="margin-bottom: 10px;" ng-show="edit.enabled" ng-repeat="link in card.note.urls">
+		<input type="text" style="width: 40%; margin-right: 10px;" ng-model="link.description"></span>
+		<input type="text" style="width: 40%;" ng-model="link.content"></span>
+	</div>
 </div>
