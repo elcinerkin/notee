@@ -316,7 +316,8 @@ angular.module('noteeApp').controller('textInstanceCtrl', function ($scope, $uib
     $http({
       method: 'POST',
       url: API_NOTES_ENDPOINT,
-      data: { category: $scope.category,
+      data: { email: $scope.user,
+              category: $scope.category,
               createdDate:$scope.createdDate,
               note: $scope.text }
       }).then(function successCallback(response) {
