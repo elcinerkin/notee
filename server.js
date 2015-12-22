@@ -52,8 +52,15 @@ var schema = mongoose.Schema({
 });
 
 var Notes = restful.model('notes', schema);
-Notes.methods(['post', 'get', 'put', 'delete']);
+Notes.methods(['post', 'put', 'delete']);
 Notes.register(app, '/api/notes');
+
+app.get('/api/notes', function (req, res) {
+  Notes.find({}).sort('-createdDate').exec(function(err, notes){
+    if(err) throw err;
+    res.send(notes);  
+  })
+});
 
 app.get('/api/notes/:loggedInUser', function (req, res) {
   //var loggedInUser = req.headers.userId;

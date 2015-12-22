@@ -3,6 +3,20 @@
 		<notee-edit note="card._id"></notee-edit>
 		<notee-delete note="card._id"></notee-delete>
 		<div class="title" style="{{ 'background:' + card.note.color + ';'}}" contenteditable={{edit.enabled}} ng-model="card.note.title" ng-keydown="this.blur()"></div>
+
+		<div style="text-align: right; padding: 10px;" ng-show="edit.enabled">
+			<label>Choose a color for the note</label>
+			<select ng-model="card.note.color" class="">
+              <option value="#FFFFFF" selected>White</option>
+              <option value="#FF5050">Red</option>
+              <option value="#66FF66">Green</option>
+              <option value="#8D8D8D">Grey</option>
+              <option value="#99CCFF">Blue</option>
+              <option value="#ffff4d">Yellow</option>
+              <option value="#FF66FF">Purple</option>
+            </select>
+		</div>
+
 		<div ng-switch-when="text" notee-text></div>
 		<div ng-switch-when="todo" notee-todo></div>
 		<div ng-switch-when="image" notee-image></div>

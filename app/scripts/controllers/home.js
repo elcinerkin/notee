@@ -225,6 +225,13 @@ angular.module('noteeApp')
     $scope.card.note.urls.splice(index, 1); 
   }
 
+  $scope.resetNewLink = function(){
+    $scope.edit.newLink = {
+      content: '',
+      description: ''
+    }
+  };
+
   $scope.keyPressed = function(event, tag) {
     if (event.keyCode == 13) {
       console.log(tag);
