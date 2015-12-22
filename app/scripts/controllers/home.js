@@ -8,7 +8,7 @@
  * Controller of the noteeApp
  */
 angular.module('noteeApp')
-  .controller('HomeCtrl', function ($scope, $uibModal, $log, $http, $filter, ENV, $rootScope, $window) {
+  .controller('HomeCtrl', function ($scope, $uibModal, $log, $http, $filter, ENV, $rootScope, $window, $cookies) {
     $scope.texts = [];
     $scope.todos = [];
     $scope.photos = [];
@@ -21,10 +21,14 @@ angular.module('noteeApp')
     var API_NOTES_ENDPOINT = ENV.apiNotesEndpoint;
     console.log(ENV.apiNotesEndpoint);
 
-    $scope.redirectHome = function(googleUser) {    
-      $window.location.href = '#/home';
+    var setCookie = function(){
+      $cookies.put('userName', $scope.user);
+    }
+
+    $scope.redirectHome = function(googleUser) {  
       $scope.user = googleUser;
-      console.log("userEmail: "+$scope.user)
+      setCookie();  
+      $window.location.href = '#/home';
      };
 
     $scope.formatDate = function(){
@@ -95,6 +99,8 @@ angular.module('noteeApp')
         }
       }
 
+      $scope.user = $cookies.get('userName');
+      
       var appendUserEmail = function(url){
         if($scope.user && $scope.user.length>0)
           return url.concat("/"+$scope.user);
