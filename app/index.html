@@ -26,25 +26,20 @@
             <a class="navbar-brand" href="#/home">notee</a>
           </div>
 
-          <div class="collapse navbar-collapse navbar-menu" collapse="!navCollapsed" ng-controller="headerCtrl">
+          <div class="collapse navbar-collapse navbar-menu" collapse="!navCollapsed" ng-controller="LoginCtrl">
               <ul class="nav navbar-nav">
-                <li ng-class="{ active: isActive('/home')}"><a href="#/home">Home</a></li>
+                <li ng-class="{ active: isActive('/home')}" ng-if="homeVisible"><a href="#/home">Home</a></li>
                 <li ng-class="{ active: isActive('/about')}"><a ng-href="#/about">About</a></li>
                 <li ng-class="{ active: isActive('/help')}"><a ng-href="#/help">FAQ</a></li>
               </ul>
-              <a style="float:right; padding:20px 0" href="#" onclick="signOut();">Sign out</a> 
+              <a style="float:right; padding:20px 0" href="#" ng-click="signOut();">Sign out</a> 
           </div> 
         </div>
       </div>
     </div>
 
     <script>
-      function signOut() {
-        var auth2 = gapi.auth2.getAuthInstance();
-        auth2.signOut().then(function () {
-          console.log('User signed out.');
-        });
-      }
+
     </script>
 
     <div class="container">
