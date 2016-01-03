@@ -17,6 +17,7 @@ angular.module('noteeApp')
     $scope.searchDate = '';
     $scope.edit = { enabled: false };
     $scope.user = "";
+    $rootScope.homeVisible = true;
 
     var API_NOTES_ENDPOINT = ENV.apiNotesEndpoint;
     console.log(ENV.apiNotesEndpoint);
@@ -29,7 +30,6 @@ angular.module('noteeApp')
       $scope.user = googleUser;
       setCookie();  
       $window.location.href = '#/home';
-      $rootScope.homeVisible = true;
      };
 
     $scope.formatDate = function(){
