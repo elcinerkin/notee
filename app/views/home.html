@@ -41,16 +41,16 @@
 				<option value="#FF66FF">Purple</option>
 				</select><br><br>
       <table ng-repeat="list in todo.lists">
-        <tr><td class="col-xs-4">
+        <tr class="row"><td class="col-xs-4">
           <div class="btn-group">
             <label class="btn btn-danger btn-xs" ng-model="list.priority" uib-btn-radio="'true'">High</label>
             <label class="btn btn-default btn-xs" ng-model="list.priority" uib-btn-radio="'false'">Low</label>
           </div></td>
-        <td>
+        <td class="col-xs-6 col-xs-offset-1">
   				<input ng-show="list.content.length > 0" type="checkbox" ng-model="list.checked"/>
   				<span ng-class="{strike:list.checked}">{{ list.content }}</span>
         </td>
-        <td class="col-xs-1 col-xs-offset-4"><button class="btn btn-warning btn-xs" ng-click="remove($index)">remove</button></td></tr>
+        <td class="col-xs-1"><button class="btn btn-warning btn-xs" ng-click="remove($index)">remove</button></td></tr>
 	    </table>       
         <div ng-show="list.content.length > 0">
           <b>Preview: </b> {{ list.content }} 
