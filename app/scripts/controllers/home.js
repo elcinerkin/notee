@@ -29,6 +29,7 @@ angular.module('noteeApp')
       $scope.user = googleUser;
       setCookie();  
       $window.location.href = '#/home';
+      $rootScope.homeVisible = true;
      };
 
     $scope.formatDate = function(){
