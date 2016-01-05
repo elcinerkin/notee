@@ -66,6 +66,15 @@
 	cursor: pointer;
 	background-color: white;
 }
+.card .view-title {
+	padding: 5px 30px;
+	width: 100%;
+	overflow: hidden;
+	text-align: center;
+	text-transform: capitalize;
+	cursor: pointer;
+	background-color: white;
+}
 .card .content {
 	padding: 10px;
 	margin: 0;
@@ -78,7 +87,7 @@
 	cursor: pointer;
 }
 .card .todo {	
-	position: relative;
+	position: relative;	
 }
 .todo div {
 	display: inline-block;
@@ -89,9 +98,14 @@
 .todo span {
 	display: inline-block;
 }
+.todo>label {
+	padding-right: 70px;
+}
 .todo .priority {
+	display: inline-block;
 	position: absolute;
 	right: 0;
+	top: 0;
 	height: 20px;
 }
 .priority label {

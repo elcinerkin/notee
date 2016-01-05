@@ -2,7 +2,7 @@
 	<div class="card" style="background: #eee;" ng-switch="card.category">
 		<notee-edit note="card._id"></notee-edit>
 		<notee-delete note="card._id"></notee-delete>
-		<div class="title" style="{{ 'background:' + card.note.color + ';'}}" contenteditable={{edit.enabled}} ng-model="card.note.title" ng-keydown="this.blur()"></div>
+		<div class="view-title" style="{{ 'background:' + card.note.color + ';'}}" contenteditable={{edit.enabled}} ng-model="card.note.title" ng-keydown="this.blur()"></div>
 
 		<div style="text-align: right; padding: 10px;" ng-show="edit.enabled">
 			<label>Choose a color for the note</label>
