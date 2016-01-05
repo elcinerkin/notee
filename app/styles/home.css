@@ -74,6 +74,7 @@
 	text-transform: capitalize;
 	cursor: pointer;
 	background-color: white;
+	word-break: break-word;
 }
 .card .content {
 	padding: 10px;
@@ -99,7 +100,7 @@
 	display: inline-block;
 }
 .todo>label {
-	padding-right: 70px;
+	padding-right: 70px;	
 }
 .todo .priority {
 	display: inline-block;

@@ -10,6 +10,7 @@
  */
 angular
   .module('noteeApp', [
+    'ngTouch',
     'ngAnimate',
     'ngCookies',
     'ngResource',
