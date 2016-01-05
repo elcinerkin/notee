@@ -24,8 +24,9 @@
 	    // Useful data for your client-side scripts:
 	    var profile = googleUser.getBasicProfile();
 	    var user = profile.getEmail();
+	    var name = profile.getName();
 		var scope = angular.element($("#loginElement")).scope();
-		scope.redirectHome(user);
+		scope.redirectHome(user, name);
   	  };
   </script>
 

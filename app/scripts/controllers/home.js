@@ -17,6 +17,7 @@ angular.module('noteeApp')
     $scope.searchDate = '';
     $scope.edit = { enabled: false };
     $scope.user = "";
+    $scope.userName = "";
     $rootScope.homeVisible = true;
 
     var API_NOTES_ENDPOINT = ENV.apiNotesEndpoint;
@@ -26,8 +27,9 @@ angular.module('noteeApp')
       $cookies.put('userName', $scope.user);
     }
 
-    $scope.redirectHome = function(googleUser) {  
+    $scope.redirectHome = function(googleUser, userName) {  
       $scope.user = googleUser;
+      $scope.userName = userName;
       setCookie();  
       $window.location.href = '#/home';
      };
